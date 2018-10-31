@@ -1,26 +1,28 @@
 # written to be compatible with Code::Blocks
 
-# use clang for debug builds
 CC  = clang
 CXX = clang++
 # CC  = gcc
 # CXX = g++
 
-CFLAGS   = -Wall
-CXXFLAGS = -Wall --std=c++11
+OUTDIR = bin/$(TYPE)
+OBJDIR = obj/$(TYPE)
+SRCDIR = src
+ICDDIR = include
+
+FLAGS    = -Wall -I$(ICDDIR) -I$(SRCDIR)
+CFLAGS   = $(FLAGS)
+CXXFLAGS = $(FLAGS) --std=c++11
 
 PROJECT = main
 TYPE = Debug
 
-OUTDIR = bin/$(TYPE)
-OBJDIR = obj/$(TYPE)
 
 MKDIR = mkdir -p
-RM = rm -rf
+RM = rm -r
 
 
-all: directories prog exit
-
+all: directories $(patsubst %,$(OBJDIR)/%.o, CSVparser CSVwriter schulerparser) $(OUTDIR)/$(PROJECT)
 
 directories: $(OBJDIR) $(OUTDIR)
 
@@ -31,24 +33,22 @@ $(OBJDIR):
 	$(MKDIR) $(OBJDIR)
 
 
-prog: $(OUTDIR)/$(PROJECT)
+$(OBJDIR)/%.o: $(SRCDIR)/%.c
+	$(CC)  $(CFLAGS)   -c -o $@ $<
 
-$(OUTDIR)/$(PROJECT):  $(OBJDIR)/main.o $(OBJDIR)/CSVparser.o $(OBJDIR)/schulerparser.o 
-	$(CXX) $(CXXFLAGS) $(OBJDIR)/main.o $(OBJDIR)/CSVparser.o $(OBJDIR)/schulerparser.o -o $(OUTDIR)/$(PROJECT)
+$(OBJDIR)/%.o: $(SRCDIR)/%.cpp
+	$(CXX) $(CXXFLAGS) -c -o $@ $<
+
 
 $(OBJDIR)/main.o: main.cpp
 	$(CXX) $(CXXFLAGS) -c $^ -o $@
 
-$(OBJDIR)/CSVparser.o: include/CSVparser.c
-	$(CC) $(CCFLAGS) -c $^ -o $@
+$(OUTDIR)/$(PROJECT):  $(OBJDIR)/main.o $(OBJDIR)/CSVparser.o $(OBJDIR)/schulerparser.o 
+	$(CXX) $(CXXFLAGS) $(OBJDIR)/main.o $(OBJDIR)/CSVparser.o $(OBJDIR)/schulerparser.o -o $(OUTDIR)/$(PROJECT)
 
-$(OBJDIR)/CSVwriter.o: include/CSVwriter.cpp
-	$(CXX) $(CXXFLAGS) -c $^ -o $@
 
-$(OBJDIR)/schulerparser.o: include/schulerparser.cpp
-	$(CXX) $(CXXFLAGS) -c $^ -o $@
-run:
-	$(OUTDIR)/$(PROJECT)
+run: all
+	$(OUTDIR)/$(PROJECT) $(ARGS)
 
 
 __clean:
@@ -58,7 +58,3 @@ __clean:
 rebuild: __clean all
 
 clean: rebuild
-
-
-exit:
-	@echo
