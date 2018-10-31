@@ -22,7 +22,7 @@ MKDIR = mkdir -p
 RM = rm -r
 
 
-all: directories $(patsubst %,$(OBJDIR)/%.o, CSVparser CSVwriter schulerparser) $(OUTDIR)/$(PROJECT)
+all: directories $(patsubst %,$(OBJDIR)/%.o, CSVparser CSVwriter schulerparser main) $(OUTDIR)/$(PROJECT)
 
 directories: $(OBJDIR) $(OUTDIR)
 
@@ -40,11 +40,8 @@ $(OBJDIR)/%.o: $(SRCDIR)/%.cpp
 	$(CXX) $(CXXFLAGS) -c -o $@ $<
 
 
-$(OBJDIR)/main.o: main.cpp
-	$(CXX) $(CXXFLAGS) -c $^ -o $@
-
-$(OUTDIR)/$(PROJECT):  $(OBJDIR)/main.o $(OBJDIR)/CSVparser.o $(OBJDIR)/schulerparser.o 
-	$(CXX) $(CXXFLAGS) $(OBJDIR)/main.o $(OBJDIR)/CSVparser.o $(OBJDIR)/schulerparser.o -o $(OUTDIR)/$(PROJECT)
+$(OUTDIR)/$(PROJECT): $(OBJDIR)/main.o $(OBJDIR)/CSVparser.o $(OBJDIR)/schulerparser.o
+	$(CXX) $(CXXFLAGS) $^ -o $(OUTDIR)/$(PROJECT)
 
 
 run: all
