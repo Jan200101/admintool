@@ -6,7 +6,7 @@
 
 #include <iostream>
 
-#define DEBUG true // debug prints
+#define DEBUG 0 // debug prints
 
 // Schuler Class
 void Schuler::init(int nr, std::string vorname, std::string nachname, std::string geburtsdatum, std::string username, std::string password)
@@ -111,7 +111,7 @@ void readSchuler(std::vector<Schuler> &schulerliste)
 void writeSchuler(std::vector<Schuler> &schulerliste)
 {
     CSVWriter csv(",");
-    for (int i = 0; i < schulerliste.size(); ++i)
+    for (long unsigned int i = 0; i < schulerliste.size(); ++i)
     {
         if (!schulerliste[i].isEmpty())
         {
