@@ -1,7 +1,7 @@
 # written to be compatible with Code::Blocks
 
-#CC  = clang
-#CXX = clang++
+# CC  = clang
+# CXX = clang++
 # CC  = gcc
 # CXX = g++
 
@@ -20,9 +20,6 @@ TYPE = Debug
 
 MKDIR = mkdir -p
 RM = rm -r
-
-Debug: all
-cleanDebug: clean
 
 all: directories $(patsubst %,$(OBJDIR)/%.o, CSVparser CSVwriter schulerparser main) $(OUTDIR)/$(PROJECT)
 
