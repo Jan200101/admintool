@@ -1,10 +1,9 @@
 #include "schulerparser.h"
+#include <iostream>
 #include <string>
 #include <vector>
 #include "CSVparser.h"
 #include "CSVwriter.cpp"
-
-#include <iostream>
 
 #define DEBUG 0 // debug prints
 
