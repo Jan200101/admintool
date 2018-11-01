@@ -1,7 +1,7 @@
 # written to be compatible with Code::Blocks
 
-CC  = clang
-CXX = clang++
+#CC  = clang
+#CXX = clang++
 # CC  = gcc
 # CXX = g++
 
@@ -10,17 +10,19 @@ OBJDIR = obj/$(TYPE)
 SRCDIR = src
 ICDDIR = include
 
-FLAGS    = -Wall -I$(ICDDIR) -I$(SRCDIR)
-CFLAGS   = $(FLAGS)
+FLAGS    = -I$(ICDDIR) -I$(SRCDIR) -Wall
+CFLAGS   = $(FLAGS) --std=c11
 CXXFLAGS = $(FLAGS) --std=c++11
 
-PROJECT = main
+PROJECT = admintool
 TYPE = Debug
 
 
 MKDIR = mkdir -p
 RM = rm -r
 
+Debug: all
+cleanDebug: clean
 
 all: directories $(patsubst %,$(OBJDIR)/%.o, CSVparser CSVwriter schulerparser main) $(OUTDIR)/$(PROJECT)
 

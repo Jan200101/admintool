@@ -1,0 +1,13 @@
+# depslib dependency file v1.0
+1541014014 source:/home/sentry/git/admintool/include/CSVwriter.cpp
+	<fstream>
+	<iostream>
+	<sstream>
+	<typeinfo>
+
+1541013836 source:/home/sentry/git/admintool/src/CSVwriter.cpp
+	<fstream>
+	<iostream>
+	<sstream>
+	<typeinfo>
+
