@@ -34,8 +34,8 @@
 		</Compiler>
 		<Unit filename="Makefile" />
 		<Unit filename="include/CSVparser.h" />
-		<Unit filename="include/CSVwriter.cpp" />
 		<Unit filename="include/schulerparser.h" />
+		<Unit filename="res/test.csv" />
 		<Unit filename="src/CSVparser.c">
 			<Option compilerVar="CC" />
 		</Unit>
