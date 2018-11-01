@@ -8,7 +8,8 @@ const char FILENAME[] = "res/test.csv";
 class Schuler
 {
    private:
-    unsigned int nr;
+    unsigned short nr;
+    unsigned short permissionlevel;
 
     std::string vorname;
     std::string nachname;
@@ -23,14 +24,17 @@ class Schuler
    public:
     bool enabled = false;
 
-    void init(int nr, std::string vorname, std::string nachname,
-              short geburtsjahr, short geburtsmonat, short geburtstag,
+    void init(unsigned short nr, unsigned short permissionlevel,
+              std::string vorname, std::string nachname,
+              unsigned short geburtsjahr, unsigned short geburtsmonat, unsigned short geburtstag,
               std::string username, std::string password);
 
-    void init(int nr, std::string vorname, std::string nachname,
+    void init(unsigned short nr, unsigned short permissionlevel,
+              std::string vorname, std::string nachname,
               short geburtsjahr, short geburtsmonat, short geburtstag);
 
-    int getNr();
+    unsigned short getNr();
+    unsigned short getPermission();
 
     std::string getVorname();
     std::string getNachname();
@@ -48,5 +52,6 @@ void readSchuler(std::vector<Schuler> &schulerliste);
 void writeSchuler(std::vector<Schuler> &schulerliste);
 
 void appendSchuler(std::vector<Schuler> &schulerliste,
+                   unsigned int permissionlevel,
                    std::string vorname, std::string nachname,
                    short geburtsjahr, short geburtsmonat, short geburtstag);
