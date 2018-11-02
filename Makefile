@@ -1,21 +1,22 @@
 
-CC        ?= gcc
-CXX       ?= g++
+CC          ?= gcc
+CXX         ?= g++
 
-OUTDIR     = bin/$(TYPE)
-OBJDIR     = obj/$(TYPE)
-SOURCEDIR  = src
-INCLUDEDIR = include
+OUTDIR       = bin/$(TYPE)
+OBJDIR       = obj/$(TYPE)
+SOURCEDIR    = src
+INCLUDEDIR   = include
 
-FLAGS      = -I$(INCLUDEDIR) -I$(SOURCEDIR) -Wall
-CFLAGS     = $(FLAGS) --std=c11
-CXXFLAGS   = $(FLAGS) --std=c++11
+COMMONFLAGS  = -I$(INCLUDEDIR) -I$(SOURCEDIR) -Wall --ansi -Wpedantic
+COMMONFLAGS += $(FLAGS)
+CFLAGS       = $(COMMONFLAGS) --std=c11
+CXXFLAGS     = $(COMMONFLAGS) --std=c++11
 
-PROJECT    = admintool
-TYPE       = Debug
+PROJECT      = admintool
+TYPE         = Debug
 
-MKDIR      = mkdir -p
-RM         = rm -r
+MKDIR        = mkdir -p
+RM           = rm -r
 
 all: directories $(OUTDIR)/$(PROJECT)
 
@@ -42,8 +43,8 @@ run: all
 
 
 __clean:
-	$(RM) $(OUTDIR)
-	$(RM) $(OBJDIR)
+	-$(RM) $(OUTDIR)
+	-$(RM) $(OBJDIR)
 
 rebuild: __clean all
 

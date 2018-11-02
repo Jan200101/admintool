@@ -6,8 +6,8 @@
 #include "CSVparser.h"
 #include "CSVwriter.cpp"
 
-#define DEBUG 1   // debug prints
-#define NOWRITE 1 // stop writing DEBUG
+#define DEBUG 1     // debug prints
+#define NOMAKECSV 1 // stop writing DEBUG
 
 // Schuler Class
 void Schuler::init(unsigned short nr, unsigned short permissionlevel,
@@ -97,7 +97,7 @@ std::string Schuler::getPassword()
 
 void Schuler::makeCSV(CSVWriter &csv)
 {
-    if (DEBUG) std::cout << "[DEBUG]MAKECSV" << std::endl;
+    if (DEBUG && !NOMAKECSV) std::cout << "[DEBUG]MAKECSV" << std::endl;
     csv.newRow() << this->nr << this->permissionlevel
                  << this->vorname << this->nachname
                  << this->geburtsdatum[0] << this->geburtsdatum[1]
@@ -117,7 +117,7 @@ void readSchuler(std::vector<Schuler> &schulerliste)
     // CsvParser_destroy_row(header) ; -> causes error in current version
     while ((row = CsvParser_getRow(csvparser)))
     {
-        if (DEBUG) std::cout << "[DEBUG]READROW " << entry << std::endl;
+        if (DEBUG) std::cout << "[DEBUG]READ " << entry << std::endl;
 
         char **rowFields = CsvParser_getFields(row);
 
@@ -142,10 +142,9 @@ void writeSchuler(std::vector<Schuler> &schulerliste)
 {
     CSVWriter csv(",");
 
+    if (DEBUG) std::cout << "[DEBUG]WRITE" << std::endl;
     for (long unsigned int i = 0; i < schulerliste.size(); ++i)
     {
-        if (DEBUG && !NOWRITE) std::cout << "[DEBUG]WRITEROW " << i << std::endl;
-
         if (schulerliste[i].enabled)
         {
             schulerliste[i].makeCSV(csv);
@@ -163,7 +162,7 @@ void appendSchuler(std::vector<Schuler> &schulerliste,
     short entry = 0;
     while (schulerliste[entry].enabled) ++entry;
 
-    if (DEBUG) std::cout << "[DEBUG]APPENDROW " << entry << std::endl;
+    if (DEBUG) std::cout << "[DEBUG]APPEND " << entry << std::endl;
 
     schulerliste[entry].init(schulerliste[entry - 1].getNr() + 1,
                              permissionlevel,
