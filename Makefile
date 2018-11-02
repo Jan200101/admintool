@@ -29,14 +29,14 @@ $(OBJDIR):
 	$(MKDIR) $(OBJDIR)
 
 $(OBJDIR)/%.o: $(SOURCEDIR)/%.c
-	$(CC)  $(CFLAGS)   -c -o $@ $<
+	$(CC)  $(CFLAGS) -c -o $@ $<
 
 $(OBJDIR)/%.o: $(SOURCEDIR)/%.cpp
 	$(CXX) $(CXXFLAGS) -c -o $@ $<
 
 
 $(OUTDIR)/$(PROJECT): $(OBJDIR)/main.o $(OBJDIR)/schulerparser.o $(OBJDIR)/CSVparser.o $(OBJDIR)/CSVwriter.o
-	$(CXX) $(CXXFLAGS) $^ -o $(OUTDIR)/$(PROJECT)
+	$(CXX) $(CXXFLAGS) -o $(OUTDIR)/$(PROJECT) $^
 
 run: all
 	$(OUTDIR)/$(PROJECT) $(ARGS)
