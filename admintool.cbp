@@ -3,28 +3,38 @@
 	<FileVersion major="1" minor="6" />
 	<Project>
 		<Option title="admintool" />
+		<Option platforms="Windows;Unix;" />
 		<Option makefile_is_custom="1" />
 		<Option pch_mode="2" />
-		<Option compiler="clang" />
+		<Option compiler="gcc" />
 		<Build>
 			<Target title="Debug">
 				<Option output="bin/Debug/admintool" prefix_auto="1" extension_auto="1" />
 				<Option object_output="obj/Debug/" />
 				<Option type="1" />
 				<Option compiler="gcc" />
-				<Compiler>
-					<Add option="-Wall" />
-					<Add option="-std=c++11" />
-					<Add option="-std=c11" />
-					<Add option="-g" />
-				</Compiler>
 				<MakeCommands>
-					<Build command="$make -f $makefile" />
-					<CompileFile command="$make -f $makefile" />
-					<Clean command="$make -f $makefile clean" />
-					<DistClean command="$make -f $makefile distclean$target" />
-					<AskRebuildNeeded command="$make -q -f $makefile" />
-					<SilentBuild command="$make -f $makefile &gt; $(CMD_NULL)" />
+					<Build command="$make -f $makefile TYPE=$target" />
+					<CompileFile command="$make -f $makefile TYPE=$target" />
+					<Clean command="$make -f $makefile clean TYPE=$target" />
+					<DistClean command="$make -f $makefile clean TYPE=$target" />
+					<AskRebuildNeeded command="$make -q -f $makefile TYPE=$target" />
+					<SilentBuild command="$make -f $makefile TYPE=$target &gt; $(CMD_NULL)" />
+				</MakeCommands>
+			</Target>
+			<Target title="Release">
+				<Option output="bin/Release/admintool" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Debug/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Option use_console_runner="0" />
+				<MakeCommands>
+					<Build command="$make -f $makefile TYPE=$target" />
+					<CompileFile command="$make -f $makefile TYPE=$target" />
+					<Clean command="$make -f $makefile clean TYPE=$target" />
+					<DistClean command="$make -f $makefile clean TYPE=$target" />
+					<AskRebuildNeeded command="$make -q -f $makefile TYPE=$target" />
+					<SilentBuild command="$make -f $makefile TYPE=$target &gt; $(CMD_NULL)" />
 				</MakeCommands>
 			</Target>
 		</Build>

@@ -39,10 +39,15 @@ class Schuler
     std::string getVorname();
     std::string getNachname();
 
-    short *getGeburtsdatum();
+    short getGeburtsjahr();
+    short getGeburtsmonat();
+    short getGeburtstag();
 
     std::string getUsername();
     std::string getPassword();
+
+    void setPassword(std::string password);
+    void resetPassword();
 
     void makeCSV(CSVWriter &csv);
 };
@@ -55,3 +60,5 @@ void appendSchuler(std::vector<Schuler> &schulerliste,
                    unsigned int permissionlevel,
                    std::string vorname, std::string nachname,
                    short geburtsjahr, short geburtsmonat, short geburtstag);
+
+void disableSchuler(Schuler &entry);
