@@ -10,9 +10,9 @@ extern "C"
 {
 #endif
 
-    CsvParser *CsvParser_new(const char *filePath, const char *delimiter, int firstLineIsHeader)
+    CsvParser* CsvParser_new(const char* filePath, const char* delimiter, int firstLineIsHeader)
     {
-        CsvParser *csvParser = (CsvParser *)malloc(sizeof(CsvParser));
+        CsvParser* csvParser = (CsvParser*)malloc(sizeof(CsvParser));
         if (filePath == NULL)
         {
             csvParser->filePath_ = NULL;
@@ -20,7 +20,7 @@ extern "C"
         else
         {
             int filePathLen = strlen(filePath);
-            csvParser->filePath_ = (char *)malloc((filePathLen + 1));
+            csvParser->filePath_ = (char*)malloc((filePathLen + 1));
             strcpy(csvParser->filePath_, filePath);
         }
         csvParser->firstLineIsHeader_ = firstLineIsHeader;
@@ -46,20 +46,20 @@ extern "C"
         return csvParser;
     }
 
-    CsvParser *CsvParser_new_from_string(const char *csvString, const char *delimiter, int firstLineIsHeader)
+    CsvParser* CsvParser_new_from_string(const char* csvString, const char* delimiter, int firstLineIsHeader)
     {
-        CsvParser *csvParser = CsvParser_new(NULL, delimiter, firstLineIsHeader);
+        CsvParser* csvParser = CsvParser_new(NULL, delimiter, firstLineIsHeader);
         csvParser->fromString_ = 1;
         if (csvString != NULL)
         {
             int csvStringLen = strlen(csvString);
-            csvParser->csvString_ = (char *)malloc(csvStringLen + 1);
+            csvParser->csvString_ = (char*)malloc(csvStringLen + 1);
             strcpy(csvParser->csvString_, csvString);
         }
         return csvParser;
     }
 
-    void CsvParser_destroy(CsvParser *csvParser)
+    void CsvParser_destroy(CsvParser* csvParser)
     {
         if (csvParser == NULL)
         {
@@ -88,7 +88,7 @@ extern "C"
         free(csvParser);
     }
 
-    void CsvParser_destroy_row(CsvRow *csvRow)
+    void CsvParser_destroy_row(CsvRow* csvRow)
     {
         int i;
         for (i = 0; i < csvRow->numOfFields_; i++)
@@ -98,7 +98,7 @@ extern "C"
         free(csvRow);
     }
 
-    CsvRow *CsvParser_getHeader(CsvParser *csvParser)
+    CsvRow* CsvParser_getHeader(CsvParser* csvParser)
     {
         if (!csvParser->firstLineIsHeader_)
         {
@@ -112,7 +112,7 @@ extern "C"
         return csvParser->header_;
     }
 
-    CsvRow *CsvParser_getRow(CsvParser *csvParser)
+    CsvRow* CsvParser_getRow(CsvParser* csvParser)
     {
         if (csvParser->firstLineIsHeader_ && csvParser->header_ == NULL)
         {
@@ -121,17 +121,17 @@ extern "C"
         return _CsvParser_getRow(csvParser);
     }
 
-    int CsvParser_getNumFields(CsvRow *csvRow)
+    int CsvParser_getNumFields(CsvRow* csvRow)
     {
         return csvRow->numOfFields_;
     }
 
-    char **CsvParser_getFields(CsvRow *csvRow)
+    char** CsvParser_getFields(CsvRow* csvRow)
     {
         return csvRow->fields_;
     }
 
-    CsvRow *_CsvParser_getRow(CsvParser *csvParser)
+    CsvRow* _CsvParser_getRow(CsvParser* csvParser)
     {
         int numRowRealloc = 0;
         int acceptedFields = 64;
@@ -159,8 +159,8 @@ extern "C"
                 if (csvParser->fileHandler_ == NULL)
                 {
                     int errorNum = errno;
-                    const char *errStr = strerror(errorNum);
-                    char *errMsg = (char *)malloc(1024 + strlen(errStr));
+                    const char* errStr = strerror(errorNum);
+                    char* errMsg = (char*)malloc(1024 + strlen(errStr));
                     strcpy(errMsg, "");
                     sprintf(errMsg, "Error opening CSV file for reading: %s : %s", csvParser->filePath_, errStr);
                     _CsvParser_setErrorMessage(csvParser, errMsg);
@@ -169,11 +169,11 @@ extern "C"
                 }
             }
         }
-        CsvRow *csvRow = (CsvRow *)malloc(sizeof(CsvRow));
-        csvRow->fields_ = (char **)malloc(acceptedFields * sizeof(char *));
+        CsvRow* csvRow = (CsvRow*)malloc(sizeof(CsvRow));
+        csvRow->fields_ = (char**)malloc(acceptedFields * sizeof(char*));
         csvRow->numOfFields_ = 0;
         int fieldIter = 0;
-        char *currField = (char *)malloc(acceptedCharsInField);
+        char* currField = (char*)malloc(acceptedCharsInField);
         int inside_complex_field = 0;
         int currFieldCharIter = 0;
         int seriesOfQuotesLength = 0;
@@ -231,7 +231,7 @@ extern "C"
             if (isEndOfFile || ((currChar == csvParser->delimiter_ || currChar == '\n') && !inside_complex_field))
             {
                 currField[lastCharIsQuote ? currFieldCharIter - 1 : currFieldCharIter] = '\0';
-                csvRow->fields_[fieldIter] = (char *)malloc(currFieldCharIter + 1);
+                csvRow->fields_[fieldIter] = (char*)malloc(currFieldCharIter + 1);
                 strcpy(csvRow->fields_[fieldIter], currField);
                 free(currField);
                 csvRow->numOfFields_++;
@@ -241,11 +241,11 @@ extern "C"
                 }
                 if (csvRow->numOfFields_ != 0 && csvRow->numOfFields_ % acceptedFields == 0)
                 {
-                    csvRow->fields_ = (char **)realloc(csvRow->fields_, ((numRowRealloc + 2) * acceptedFields) * sizeof(char *));
+                    csvRow->fields_ = (char**)realloc(csvRow->fields_, ((numRowRealloc + 2) * acceptedFields) * sizeof(char*));
                     numRowRealloc++;
                 }
                 acceptedCharsInField = 64;
-                currField = (char *)malloc(acceptedCharsInField);
+                currField = (char*)malloc(acceptedCharsInField);
                 currFieldCharIter = 0;
                 fieldIter++;
                 inside_complex_field = 0;
@@ -257,14 +257,14 @@ extern "C"
                 if (currFieldCharIter == acceptedCharsInField - 1)
                 {
                     acceptedCharsInField *= 2;
-                    currField = (char *)realloc(currField, acceptedCharsInField);
+                    currField = (char*)realloc(currField, acceptedCharsInField);
                 }
             }
             lastCharIsQuote = (currChar == '\"') ? 1 : 0;
         }
     }
 
-    int _CsvParser_delimiterIsAccepted(const char *delimiter)
+    int _CsvParser_delimiterIsAccepted(const char* delimiter)
     {
         char actualDelimiter = *delimiter;
         if (actualDelimiter == '\n' || actualDelimiter == '\r' || actualDelimiter == '\0' ||
@@ -275,18 +275,18 @@ extern "C"
         return 1;
     }
 
-    void _CsvParser_setErrorMessage(CsvParser *csvParser, const char *errorMessage)
+    void _CsvParser_setErrorMessage(CsvParser* csvParser, const char* errorMessage)
     {
         if (csvParser->errMsg_ != NULL)
         {
             free(csvParser->errMsg_);
         }
         int errMsgLen = strlen(errorMessage);
-        csvParser->errMsg_ = (char *)malloc(errMsgLen + 1);
+        csvParser->errMsg_ = (char*)malloc(errMsgLen + 1);
         strcpy(csvParser->errMsg_, errorMessage);
     }
 
-    const char *CsvParser_getErrorMessage(CsvParser *csvParser)
+    const char* CsvParser_getErrorMessage(CsvParser* csvParser)
     {
         return csvParser->errMsg_;
     }

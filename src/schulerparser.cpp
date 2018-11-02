@@ -7,8 +7,8 @@
 #include "CSVwriter.cpp"
 
 #define DEBUG 1     // debug prints
-#define NOMAKECSV 1 // stop makeCSV DEBUG, useful tesing anything
-#define NOGETNR 1   // stop getNr DEBUG, useful when appening a lot
+#define NOMAKECSV 0 // stop makeCSV DEBUG, useful tesing anything
+#define NOGETNR 0   // stop getNr DEBUG, useful when appening a lot
 
 // Schuler Class
 void Schuler::init(unsigned short nr, unsigned short permissionlevel,
@@ -43,9 +43,12 @@ void Schuler::init(unsigned short nr, unsigned short permissionlevel,
 
 void Schuler::init(unsigned short nr, unsigned short permissionlevel,
                    std::string vorname, std::string nachname,
-                   short geburtsjahr, short geburtsmonat, short geburtstag)
+                   unsigned short geburtsjahr, unsigned short geburtsmonat, unsigned short geburtstag)
 {
-    this->init(nr, permissionlevel, vorname, nachname, geburtsjahr, geburtsmonat, geburtstag, "", "");
+    this->init(nr, permissionlevel,
+               vorname, nachname,
+               geburtsjahr, geburtsmonat, geburtstag,
+               "", "");
 }
 
 unsigned short Schuler::getNr()
@@ -72,19 +75,28 @@ std::string Schuler::getNachname()
     return this->nachname;
 }
 
-short Schuler::getGeburtsjahr()
+unsigned short* Schuler::getGeburtsdatum()
+{
+    unsigned short* datum = (unsigned short*)std::malloc(3);
+
+    datum = this->geburtsdatum;
+
+    return datum;
+}
+
+unsigned short Schuler::getGeburtsjahr()
 {
     if (DEBUG) std::cout << "[DEBUG]GETGEBURTSJAHR" << std::endl;
     return this->geburtsdatum[0];
 }
 
-short Schuler::getGeburtsmonat()
+unsigned short Schuler::getGeburtsmonat()
 {
     if (DEBUG) std::cout << "[DEBUG]GETGEBURTSMONAT" << std::endl;
     return this->geburtsdatum[1];
 }
 
-short Schuler::getGeburtstag()
+unsigned short Schuler::getGeburtstag()
 {
     if (DEBUG) std::cout << "[DEBUG]GETGEBURTSTAG" << std::endl;
     return this->geburtsdatum[2];
@@ -114,7 +126,7 @@ void Schuler::resetPassword()
     this->password = std::to_string(geburtsdatum[2]) + "." + std::to_string(geburtsdatum[1]) + "." + std::to_string(geburtsdatum[0]);
 }
 
-void Schuler::makeCSV(CSVWriter &csv)
+void Schuler::makeCSV(CSVWriter& csv)
 {
     if (DEBUG && !NOMAKECSV) std::cout << "[DEBUG]MAKECSV" << std::endl;
     csv.newRow() << this->nr << this->permissionlevel
@@ -126,19 +138,19 @@ void Schuler::makeCSV(CSVWriter &csv)
 // standalone functions
 
 // read CSV into schulerliste
-void readSchuler(std::vector<Schuler> &schulerliste)
+void readSchuler(std::vector<Schuler>& schulerliste)
 {
     short entry = 0;
     //                                   file, delimiter, first_line_is_header?
-    CsvParser *csvparser = CsvParser_new(FILENAME, ",", 0);
-    CsvRow *row;
+    CsvParser* csvparser = CsvParser_new(FILENAME, ",", 0);
+    CsvRow* row;
 
     // CsvParser_destroy_row(header) ; -> causes error in current version
     while ((row = CsvParser_getRow(csvparser)))
     {
         if (DEBUG) std::cout << "[DEBUG]READ " << entry << std::endl;
 
-        char **rowFields = CsvParser_getFields(row);
+        char** rowFields = CsvParser_getFields(row);
 
         schulerliste[entry].init(atoi(rowFields[0]),
                                  atoi(rowFields[1]),
@@ -157,7 +169,7 @@ void readSchuler(std::vector<Schuler> &schulerliste)
 }
 
 // write schulerliste into CSV
-void writeSchuler(std::vector<Schuler> &schulerliste)
+void writeSchuler(std::vector<Schuler>& schulerliste)
 {
     CSVWriter csv(",");
 
@@ -173,7 +185,7 @@ void writeSchuler(std::vector<Schuler> &schulerliste)
 }
 
 // append to schulerliste
-void appendSchuler(std::vector<Schuler> &schulerliste,
+void appendSchuler(std::vector<Schuler>& schulerliste,
                    unsigned int permissionlevel,
                    std::string vorname, std::string nachname,
                    short geburtsjahr, short geburtsmonat, short geburtstag)
@@ -190,7 +202,7 @@ void appendSchuler(std::vector<Schuler> &schulerliste,
                              geburtsjahr, geburtsmonat, geburtstag);
 }
 
-void disableSchuler(Schuler &entry)
+void disableSchuler(Schuler& entry)
 {
     if (DEBUG) std::cout << "[DEBUG]DISABLE" << std::endl;
     entry.enabled = false;

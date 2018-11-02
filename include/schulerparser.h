@@ -14,7 +14,7 @@ class Schuler
     std::string vorname = "";
     std::string nachname = "";
 
-    short geburtsdatum[3] = {0, 0, 0};
+    unsigned short geburtsdatum[3] = {0, 0, 0};
 
     std::string username = "";
     std::string password = ""; // soon to be hashed with sha256
@@ -31,7 +31,7 @@ class Schuler
 
     void init(unsigned short nr, unsigned short permissionlevel,
               std::string vorname, std::string nachname,
-              short geburtsjahr, short geburtsmonat, short geburtstag);
+              unsigned short geburtsjahr, unsigned short geburtsmonat, unsigned short geburtstag);
 
     unsigned short getNr();
     unsigned short getPermission();
@@ -39,9 +39,10 @@ class Schuler
     std::string getVorname();
     std::string getNachname();
 
-    short getGeburtsjahr();
-    short getGeburtsmonat();
-    short getGeburtstag();
+    unsigned short* getGeburtsdatum();
+    unsigned short getGeburtsjahr();
+    unsigned short getGeburtsmonat();
+    unsigned short getGeburtstag();
 
     std::string getUsername();
     std::string getPassword();
@@ -49,16 +50,16 @@ class Schuler
     void setPassword(std::string password);
     void resetPassword();
 
-    void makeCSV(CSVWriter &csv);
+    void makeCSV(CSVWriter& csv);
 };
 
-void readSchuler(std::vector<Schuler> &schulerliste);
+void readSchuler(std::vector<Schuler>& schulerliste);
 
-void writeSchuler(std::vector<Schuler> &schulerliste);
+void writeSchuler(std::vector<Schuler>& schulerliste);
 
-void appendSchuler(std::vector<Schuler> &schulerliste,
+void appendSchuler(std::vector<Schuler>& schulerliste,
                    unsigned int permissionlevel,
                    std::string vorname, std::string nachname,
                    short geburtsjahr, short geburtsmonat, short geburtstag);
 
-void disableSchuler(Schuler &entry);
+void disableSchuler(Schuler& entry);

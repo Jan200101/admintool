@@ -5,36 +5,37 @@
 
 #define DEBUG 0
 
-void menu(std::vector<Schuler> &schulerliste);
-void submenu1(std::vector<Schuler> &schulerliste, char &input);
-void submenu11(std::vector<Schuler> &schulerliste);
-void submenu12(std::vector<Schuler> &schulerliste);
-void submenu13(std::vector<Schuler> &schulerliste);
-void submenu14(std::vector<Schuler> &schulerliste);
+void menu();
+void submenu1();
+void option11();
+void option12();
+void option13();
+void option14();
+
+// init vector in the global space with Schuler class
+std::vector<Schuler> schulerliste(50); // 50 should be enough I am not going into dynamic memory allocation for this shit
+
+// global char to store input into
+char input;
 
 int main()
 {
-    // init vector with Schuler class
-    std::vector<Schuler> schulerliste(50); // 50 should be enough I am not going into dynamic memory allocation for this shit
-
     // read CSV into schulerliste
     // FILENAME defiend in schulerparser.h
     //         Schuler vector
     readSchuler(schulerliste);
-
-    menu(schulerliste);
+    menu();
 }
 
-void menu(std::vector<Schuler> &schulerliste)
+void menu()
 {
-    char input;
     bool running = true;
 
     while (running)
     {
         std::cout << "*** Admintool ***\n"
-                  << "1 - Schuler\n"
-                  << "0 - Exit\n";
+                  << "1 - Schüler\n"
+                  << "0 - Schließen\n";
 
         std::cin >> input;
 
@@ -42,21 +43,18 @@ void menu(std::vector<Schuler> &schulerliste)
 
         switch (input)
         {
-            case 48:
+            case '0':
                 running = false;
                 break;
 
-            case 49:
-                submenu1(schulerliste, input);
+            case '1':
+                submenu1();
                 break;
-
-            default:
-                std::cout << (int)input << std::endl;
         }
     }
 }
 
-void submenu1(std::vector<Schuler> &schulerliste, char &input)
+void submenu1()
 {
     bool running = true;
 
@@ -67,7 +65,7 @@ void submenu1(std::vector<Schuler> &schulerliste, char &input)
                   << "2 - Hinzufügen\n"
                   << "3 - Entfernen\n"
                   << "4 - Neu laden\n"
-                  << "0 - Zuruck\n";
+                  << "0 - Zurück\n";
 
         std::cin >> input;
 
@@ -75,29 +73,29 @@ void submenu1(std::vector<Schuler> &schulerliste, char &input)
 
         switch (input)
         {
-            case 48:
+            case '0':
                 running = false;
                 break;
 
-            case 49:
-                submenu11(schulerliste);
+            case '1':
+                option11();
                 break;
 
-            case 50:
-                submenu12(schulerliste);
+            case '2':
+                option12();
                 break;
 
-            case 51:
-                submenu13(schulerliste);
+            case '3':
+                option13();
                 break;
 
-            case 52:
-                submenu14(schulerliste);
+            case '4':
+                option14();
         }
     }
 }
 
-void submenu11(std::vector<Schuler> &schulerliste)
+void option11()
 {
     for (unsigned long y = 0; y < schulerliste.size(); ++y)
     {
@@ -106,13 +104,13 @@ void submenu11(std::vector<Schuler> &schulerliste)
             << schulerliste[y].getNr() << '\n'
             << schulerliste[y].getVorname() << '\n'
             << schulerliste[y].getNachname() << '\n'
-            << schulerliste[y].getGeburtsjahr() << '\n'
+            << schulerliste[y].getGeburtsdatum()[0] << '\n'
             << '\n'; // TODO make fancy
     }
     std::cout << std::endl;
 }
 
-void submenu12(std::vector<Schuler> &schulerliste)
+void option12()
 {
     std::string vorname;
     std::string nachname;
@@ -140,7 +138,7 @@ void submenu12(std::vector<Schuler> &schulerliste)
     writeSchuler(schulerliste);
 }
 
-void submenu13(std::vector<Schuler> &schulerliste)
+void option13()
 {
     bool change = false;
     unsigned short input = 0;
@@ -163,7 +161,7 @@ void submenu13(std::vector<Schuler> &schulerliste)
     if (change) writeSchuler(schulerliste);
 }
 
-void submenu14(std::vector<Schuler> &schulerliste)
+void option14()
 {
     for (unsigned long i = 0; i < schulerliste.size(); ++i)
     {
@@ -172,6 +170,7 @@ void submenu14(std::vector<Schuler> &schulerliste)
     readSchuler(schulerliste);
 }
 
+/*
 void example()
 {
     // init vector with Schuler class
@@ -197,3 +196,4 @@ void example()
 
     if (DEBUG) std::cout << "[DEBUG]DONE" << std::endl;
 }
+*/
