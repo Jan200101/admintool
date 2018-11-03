@@ -18,7 +18,10 @@ TYPE         = Debug
 MKDIR        = mkdir -p
 RM           = rm -r
 
-all: directories $(OUTDIR)/$(PROJECT)
+all:
+	$(MAKE) build -w
+
+build: directories $(OUTDIR)/$(PROJECT)
 
 directories: $(OBJDIR) $(OUTDIR)
 
