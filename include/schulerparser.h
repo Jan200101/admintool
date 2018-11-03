@@ -3,7 +3,7 @@
 #include "CSVparser.h"
 #include "CSVwriter.cpp"
 
-const char FILENAME[] = "res/test.csv";
+const char FILENAME[] = "res/schuler.csv";
 
 class Schuler
 {
