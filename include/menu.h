@@ -14,6 +14,6 @@ class menuentry
    public:
     menuentry(std::string title, std::vector<std::string> menutext, std::vector<void (*)()> menufunctions);
     bool runfunction(unsigned long entry);
-    unsigned short runinput();
+    bool runinput();
     void printtext();
 };

@@ -4,7 +4,7 @@
 #include "menu.h"
 #include "schulerparser.h"
 
-#define DEBUG 1
+#define DEBUG 0
 
 void menu();
 void schulermenu();
@@ -46,6 +46,7 @@ void menu()
     {
         menu.printtext();
         if (menu.runinput()) running = false;
+        std::cout << std::endl;
     }
 }
 
@@ -71,6 +72,7 @@ void schulermenu()
     {
         menu.printtext();
         if (menu.runinput()) running = false;
+        std::cout << std::endl;
     }
 }
 

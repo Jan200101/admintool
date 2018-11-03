@@ -4,7 +4,7 @@
 #include <string>
 #include <vector>
 
-#define DEBUG 1
+#define DEBUG 0
 
 menuentry::menuentry(std::string title, std::vector<std::string> menutext, std::vector<void (*)()> menufunctions)
 {
@@ -25,7 +25,7 @@ bool menuentry::runfunction(unsigned long entry)
     this->menufunctions[entry]();
     return 0;
 }
-unsigned short menuentry::runinput()
+bool menuentry::runinput()
 {
     if (DEBUG) std::cout << "[DEBUG] RUNINPUT" << std::endl;
 
