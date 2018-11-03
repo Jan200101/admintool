@@ -6,7 +6,7 @@
 #include "CSVparser.h"
 #include "CSVwriter.cpp"
 
-#define DEBUG 1     // debug prints
+#define DEBUG 0
 #define NOMAKECSV 0 // stop makeCSV DEBUG, useful tesing anything
 #define NOGETNR 0   // stop getNr DEBUG, useful when appening a lot
 
@@ -53,25 +53,25 @@ void Schuler::init(unsigned short nr, unsigned short permissionlevel,
 
 unsigned short Schuler::getNr()
 {
-    if (DEBUG && !NOGETNR) std::cout << "[DEBUG]GETNR" << std::endl;
+    if (DEBUG && !NOGETNR) std::cout << "[DEBUG] GETNR" << std::endl;
     return this->nr;
 }
 
 unsigned short Schuler::getPermission()
 {
-    if (DEBUG) std::cout << "[DEBUG]GETPERMISSION" << std::endl;
+    if (DEBUG) std::cout << "[DEBUG] GETPERMISSION" << std::endl;
     return this->permissionlevel;
 }
 
 std::string Schuler::getVorname()
 {
-    if (DEBUG) std::cout << "[DEBUG]GETVORNAME" << std::endl;
+    if (DEBUG) std::cout << "[DEBUG] GETVORNAME" << std::endl;
     return this->vorname;
 }
 
 std::string Schuler::getNachname()
 {
-    if (DEBUG) std::cout << "[DEBUG]GETNACHNAME" << std::endl;
+    if (DEBUG) std::cout << "[DEBUG] GETNACHNAME" << std::endl;
     return this->nachname;
 }
 
@@ -86,49 +86,49 @@ unsigned short* Schuler::getGeburtsdatum()
 
 unsigned short Schuler::getGeburtsjahr()
 {
-    if (DEBUG) std::cout << "[DEBUG]GETGEBURTSJAHR" << std::endl;
+    if (DEBUG) std::cout << "[DEBUG] GETGEBURTSJAHR" << std::endl;
     return this->geburtsdatum[0];
 }
 
 unsigned short Schuler::getGeburtsmonat()
 {
-    if (DEBUG) std::cout << "[DEBUG]GETGEBURTSMONAT" << std::endl;
+    if (DEBUG) std::cout << "[DEBUG] GETGEBURTSMONAT" << std::endl;
     return this->geburtsdatum[1];
 }
 
 unsigned short Schuler::getGeburtstag()
 {
-    if (DEBUG) std::cout << "[DEBUG]GETGEBURTSTAG" << std::endl;
+    if (DEBUG) std::cout << "[DEBUG] GETGEBURTSTAG" << std::endl;
     return this->geburtsdatum[2];
 }
 
 std::string Schuler::getUsername()
 {
-    if (DEBUG) std::cout << "[DEBUG]GETUSERNAME" << std::endl;
+    if (DEBUG) std::cout << "[DEBUG] GETUSERNAME" << std::endl;
     return this->username;
 }
 
 std::string Schuler::getPassword()
 {
-    if (DEBUG) std::cout << "[DEBUG]GETPASSWORD" << std::endl;
+    if (DEBUG) std::cout << "[DEBUG] GETPASSWORD" << std::endl;
     return this->password;
 }
 
 void Schuler::setPassword(std::string password)
 {
-    if (DEBUG) std::cout << "[DEBUG]SETPASSWORD" << std::endl;
+    if (DEBUG) std::cout << "[DEBUG] SETPASSWORD" << std::endl;
     this->password = password;
 }
 
 void Schuler::resetPassword()
 {
-    if (DEBUG) std::cout << "[DEBUG]RESETPASSWORD" << std::endl;
+    if (DEBUG) std::cout << "[DEBUG] RESETPASSWORD" << std::endl;
     this->password = std::to_string(geburtsdatum[2]) + "." + std::to_string(geburtsdatum[1]) + "." + std::to_string(geburtsdatum[0]);
 }
 
 void Schuler::makeCSV(CSVWriter& csv)
 {
-    if (DEBUG && !NOMAKECSV) std::cout << "[DEBUG]MAKECSV" << std::endl;
+    if (DEBUG && !NOMAKECSV) std::cout << "[DEBUG] MAKECSV" << std::endl;
     csv.newRow() << this->nr << this->permissionlevel
                  << this->vorname << this->nachname
                  << this->geburtsdatum[0] << this->geburtsdatum[1]
@@ -148,7 +148,7 @@ void readSchuler(std::vector<Schuler>& schulerliste)
     // CsvParser_destroy_row(header) ; -> causes error in current version
     while ((row = CsvParser_getRow(csvparser)))
     {
-        if (DEBUG) std::cout << "[DEBUG]READ " << entry << std::endl;
+        if (DEBUG) std::cout << "[DEBUG] READ " << entry << std::endl;
 
         char** rowFields = CsvParser_getFields(row);
 
@@ -173,7 +173,7 @@ void writeSchuler(std::vector<Schuler>& schulerliste)
 {
     CSVWriter csv(",");
 
-    if (DEBUG) std::cout << "[DEBUG]WRITE" << std::endl;
+    if (DEBUG) std::cout << "[DEBUG] WRITE" << std::endl;
     for (long unsigned int i = 0; i < schulerliste.size(); ++i)
     {
         if (schulerliste[i].enabled)
@@ -193,7 +193,7 @@ void appendSchuler(std::vector<Schuler>& schulerliste,
     short entry = 0;
     while (schulerliste[entry].enabled) ++entry;
 
-    if (DEBUG) std::cout << "[DEBUG]APPEND " << entry << std::endl;
+    if (DEBUG) std::cout << "[DEBUG] APPEND " << entry << std::endl;
 
     schulerliste[entry].init(schulerliste[entry - 1].getNr() + 1,
                              permissionlevel,
@@ -204,6 +204,6 @@ void appendSchuler(std::vector<Schuler>& schulerliste,
 
 void disableSchuler(Schuler& entry)
 {
-    if (DEBUG) std::cout << "[DEBUG]DISABLE" << std::endl;
+    if (DEBUG) std::cout << "[DEBUG] DISABLE" << std::endl;
     entry.enabled = false;
 }

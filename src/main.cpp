@@ -1,16 +1,17 @@
 #include <iomanip>
 #include <iostream>
 #include <vector>
+#include "menu.h"
 #include "schulerparser.h"
 
-#define DEBUG 0
+#define DEBUG 1
 
 void menu();
-void submenu1();
-void option11();
-void option12();
-void option13();
-void option14();
+void schulermenu();
+void schulerlisten();
+void schulerhinzufugen();
+void schulerneuladen();
+void schulerdeaktivieren();
 
 // init vector in the global space with Schuler class
 std::vector<Schuler> schulerliste(50); // 50 should be enough I am not going into dynamic memory allocation for this shit
@@ -24,78 +25,56 @@ int main()
     // FILENAME defiend in schulerparser.h
     //         Schuler vector
     readSchuler(schulerliste);
+
     menu();
+
+    return 0;
 }
 
 void menu()
 {
     bool running = true;
+    std::string title = "Admintool";
+
+    std::vector<std::string> text = {"Schüler"};
+
+    std::vector<void (*)()> func = {(&schulermenu)};
+
+    menuentry menu(title, text, func);
 
     while (running)
     {
-        std::cout << "*** Admintool ***\n"
-                  << "1 - Schüler\n"
-                  << "0 - Schließen\n";
-
-        std::cin >> input;
-
-        std::cout << std::endl; // flush stream
-
-        switch (input)
-        {
-            case '0':
-                running = false;
-                break;
-
-            case '1':
-                submenu1();
-                break;
-        }
+        menu.printtext();
+        if (menu.runinput()) running = false;
     }
 }
 
-void submenu1()
+void schulermenu()
 {
     bool running = true;
 
+    std::string title = "Schuler";
+
+    std::vector<std::string> text = {"Listen",
+                                     "Hinzufügen",
+                                     "Entfernen",
+                                     "Neu laden"};
+
+    std::vector<void (*)()> func = {(&schulerlisten),
+                                    (&schulerhinzufugen),
+                                    (&schulerneuladen),
+                                    (&schulerdeaktivieren)};
+
+    menuentry menu(title, text, func);
+
     while (running)
     {
-        std::cout << "*** Schuler ***\n"
-                  << "1 - Listen\n"
-                  << "2 - Hinzufügen\n"
-                  << "3 - Entfernen\n"
-                  << "4 - Neu laden\n"
-                  << "0 - Zurück\n";
-
-        std::cin >> input;
-
-        std::cout << std::endl; // flush stream
-
-        switch (input)
-        {
-            case '0':
-                running = false;
-                break;
-
-            case '1':
-                option11();
-                break;
-
-            case '2':
-                option12();
-                break;
-
-            case '3':
-                option13();
-                break;
-
-            case '4':
-                option14();
-        }
+        menu.printtext();
+        if (menu.runinput()) running = false;
     }
 }
 
-void option11()
+void schulerlisten()
 {
     for (unsigned long y = 0; y < schulerliste.size(); ++y)
     {
@@ -110,7 +89,7 @@ void option11()
     std::cout << std::endl;
 }
 
-void option12()
+void schulerhinzufugen()
 {
     std::string vorname;
     std::string nachname;
@@ -138,7 +117,7 @@ void option12()
     writeSchuler(schulerliste);
 }
 
-void option13()
+void schulerneuladen()
 {
     bool change = false;
     unsigned short input = 0;
@@ -161,7 +140,7 @@ void option13()
     if (change) writeSchuler(schulerliste);
 }
 
-void option14()
+void schulerdeaktivieren()
 {
     for (unsigned long i = 0; i < schulerliste.size(); ++i)
     {
