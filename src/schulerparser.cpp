@@ -1,14 +1,19 @@
 #include "schulerparser.h"
-#include <stdlib.h>
+#include <cstdlib>
+#include <ctime>
 #include <iostream>
 #include <string>
 #include <vector>
 #include "CSVparser.h"
 #include "CSVwriter.cpp"
+#include "sha512.h"
 
 #define DEBUG 0
 #define NOMAKECSV 0 // stop makeCSV DEBUG, useful tesing anything
-#define NOGETNR 0   // stop getNr DEBUG, useful when appening a lot
+#define NOGETNR 0   // stop getNr DEBUG, useful when appening student entries
+
+// keep this enabled or disabled all the time DO NOT SWITCH AROUND ALL THE TIME
+#define HASHPASS 1 // Hash passwords with sha512
 
 // Schuler Class
 void Schuler::init(unsigned short nr, unsigned short permissionlevel,
@@ -37,6 +42,7 @@ void Schuler::init(unsigned short nr, unsigned short permissionlevel,
     if (password.empty())
     {
         password = std::to_string(geburtstag) + "." + std::to_string(geburtsmonat) + "." + std::to_string(geburtsjahr);
+        if (HASHPASS) this->hashPassword(password);
     }
     this->password = password;
 }
@@ -77,10 +83,9 @@ std::string Schuler::getNachname()
 
 unsigned short* Schuler::getGeburtsdatum()
 {
+    if (DEBUG) std::cout << "[DEBUG] GETGEBURTSDATUM" << std::endl;
     unsigned short* datum = (unsigned short*)std::malloc(3);
-
     datum = this->geburtsdatum;
-
     return datum;
 }
 
@@ -118,12 +123,37 @@ void Schuler::setPassword(std::string password)
 {
     if (DEBUG) std::cout << "[DEBUG] SETPASSWORD" << std::endl;
     this->password = password;
+
+    if (HASHPASS)
+    {
+        this->hashPassword();
+    }
 }
 
 void Schuler::resetPassword()
 {
     if (DEBUG) std::cout << "[DEBUG] RESETPASSWORD" << std::endl;
     this->password = std::to_string(geburtsdatum[2]) + "." + std::to_string(geburtsdatum[1]) + "." + std::to_string(geburtsdatum[0]);
+}
+
+void Schuler::hashPassword()
+{
+    this->hashPassword(this->password);
+}
+
+void Schuler::hashPassword(std::string& password)
+{
+    password = sha512(this->username + password);
+}
+
+bool Schuler::comparePassword(std::string password)
+{
+    if (DEBUG) std::cout << "[DEBUG] COMPAREPASSWORD" << std::endl;
+    if (HASHPASS) this->hashPassword(password);
+
+    if (password == this->password) return 0;
+
+    return 1;
 }
 
 void Schuler::makeCSV(CSVWriter& csv)

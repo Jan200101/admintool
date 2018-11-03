@@ -49,6 +49,9 @@ class Schuler
 
     void setPassword(std::string password);
     void resetPassword();
+    void hashPassword();
+    void hashPassword(std::string& password);
+    bool comparePassword(std::string password);
 
     void makeCSV(CSVWriter& csv);
 };

@@ -10,8 +10,9 @@ void menu();
 void schulermenu();
 void schulerlisten();
 void schulerhinzufugen();
-void schulerneuladen();
 void schulerdeaktivieren();
+void schulerneuladen();
+void schulerpassvergleich();
 
 // init vector in the global space with Schuler class
 std::vector<Schuler> schulerliste(50); // 50 should be enough I am not going into dynamic memory allocation for this shit
@@ -38,7 +39,6 @@ void menu()
     std::string exittext = "Schließen";
 
     std::vector<std::string> text = {"Schüler"};
-
     std::vector<void (*)()> func = {(&schulermenu)};
 
     menuentry menu(title, text, func);
@@ -59,12 +59,13 @@ void schulermenu()
     std::vector<std::string> text = {"Listen",
                                      "Hinzufügen",
                                      "Entfernen",
-                                     "Neu laden"};
-
+                                     "Neu laden",
+                                     "Password Vergleichen"};
     std::vector<void (*)()> func = {(&schulerlisten),
                                     (&schulerhinzufugen),
+                                    (&schulerdeaktivieren),
                                     (&schulerneuladen),
-                                    (&schulerdeaktivieren)};
+                                    (&schulerpassvergleich)};
 
     menuentry menu(title, text, func);
 
@@ -118,7 +119,7 @@ void schulerhinzufugen()
     writeSchuler(schulerliste);
 }
 
-void schulerneuladen()
+void schulerdeaktivieren()
 {
     bool change = false;
     unsigned short input = 0;
@@ -141,13 +142,41 @@ void schulerneuladen()
     if (change) writeSchuler(schulerliste);
 }
 
-void schulerdeaktivieren()
+void schulerneuladen()
 {
     for (unsigned long i = 0; i < schulerliste.size(); ++i)
     {
         if (schulerliste[i].enabled) disableSchuler(schulerliste[i]);
     }
     readSchuler(schulerliste);
+}
+
+void schulerpassvergleich()
+{
+    bool status = false;
+    unsigned short input = 0;
+    std::string password = "";
+    Schuler select;
+
+    std::cout << "Welche Schuler Nr soll entfernt werden?" << std::endl;
+
+    std::cin >> input;
+
+    std::cout << "Gebe password an" << std::endl;
+
+    std::cin >> password;
+
+    for (unsigned long i = 0; i < schulerliste.size(); ++i)
+    {
+        if (input == schulerliste[i].getNr())
+        {
+            if (!schulerliste[i].comparePassword(password)) status = true;
+        }
+    }
+    if (status)
+    {
+        std::cout << "Password stimmt" << std::endl;
+    }
 }
 
 /*

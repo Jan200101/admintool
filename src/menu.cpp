@@ -36,6 +36,7 @@ bool menuentry::runinput()
     std::cout << std::endl;
     if (input == (unsigned long)-1) return 1;
     if (this->size >= input) runfunction(input);
+    std::cout << std::endl;
     return 0;
 }
 

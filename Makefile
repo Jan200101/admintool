@@ -35,7 +35,7 @@ $(OBJDIR)/%.o: $(SOURCEDIR)/%.c
 $(OBJDIR)/%.o: $(SOURCEDIR)/%.cpp
 	$(CXX) $(CXXFLAGS) -c -o $@ $<
 
-$(OUTDIR)/$(PROJECT): $(OBJDIR)/main.o $(OBJDIR)/menu.o $(OBJDIR)/schulerparser.o $(OBJDIR)/CSVparser.o $(OBJDIR)/CSVwriter.o
+$(OUTDIR)/$(PROJECT): $(OBJDIR)/main.o $(OBJDIR)/menu.o $(OBJDIR)/sha512.o $(OBJDIR)/schulerparser.o $(OBJDIR)/CSVparser.o $(OBJDIR)/CSVwriter.o
 	$(CXX) $(CXXFLAGS) -o $(OUTDIR)/$(PROJECT) $^
 
 run: all
