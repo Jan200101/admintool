@@ -7,7 +7,7 @@ OBJDIR       = obj/$(TYPE)
 SOURCEDIR    = src
 INCLUDEDIR   = include
 
-COMMONFLAGS  = -I$(INCLUDEDIR) -I$(SOURCEDIR) -Wall -Wextra -Winit-self -Wuninitialized -Wpointer-arith -Wcast-align -Wunreachable-code --ansi -Wpedantic
+COMMONFLAGS  = -I$(INCLUDEDIR) -I$(SOURCEDIR) -g -Wall -Wextra -Winit-self -Wuninitialized -Wpointer-arith -Wcast-align -Wunreachable-code --ansi -Wpedantic
 COMMONFLAGS += $(FLAGS)
 CFLAGS       = $(COMMONFLAGS) --std=c11
 CXXFLAGS     = $(COMMONFLAGS) --std=c++11
