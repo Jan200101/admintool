@@ -35,6 +35,7 @@ void menu()
 {
     bool running = true;
     std::string title = "Admintool";
+    std::string exittext = "Schließen";
 
     std::vector<std::string> text = {"Schüler"};
 
@@ -44,9 +45,8 @@ void menu()
 
     while (running)
     {
-        menu.printtext();
+        menu.printtext(exittext);
         if (menu.runinput()) running = false;
-        std::cout << std::endl;
     }
 }
 
@@ -72,7 +72,6 @@ void schulermenu()
     {
         menu.printtext();
         if (menu.runinput()) running = false;
-        std::cout << std::endl;
     }
 }
 
@@ -82,10 +81,10 @@ void schulerlisten()
     {
         if (!schulerliste[y].enabled) continue;
         std::cout
-            << schulerliste[y].getNr() << '\n'
-            << schulerliste[y].getVorname() << '\n'
-            << schulerliste[y].getNachname() << '\n'
-            << schulerliste[y].getGeburtsdatum()[0] << '\n'
+            << schulerliste[y].getNr() << ' '
+            << schulerliste[y].getVorname() << ' '
+            << schulerliste[y].getNachname() << ' '
+            << schulerliste[y].getGeburtsdatum()[0] << ' '
             << '\n'; // TODO make fancy
     }
     std::cout << std::endl;
