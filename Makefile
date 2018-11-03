@@ -18,18 +18,16 @@ TYPE         = Debug
 MKDIR        = mkdir -p
 RM           = rm -r
 
-all:
-	$(MAKE) build -w
 
-build: directories $(OUTDIR)/$(PROJECT)
+all: directories $(OUTDIR)/$(PROJECT)
 
 directories: $(OBJDIR) $(OUTDIR)
 
 $(OUTDIR):
-	$(MKDIR) $(OUTDIR)
+	@$(MKDIR) $(OUTDIR)
 
 $(OBJDIR):
-	$(MKDIR) $(OBJDIR)
+	@$(MKDIR) $(OBJDIR)
 
 $(OBJDIR)/%.o: $(SOURCEDIR)/%.c
 	$(CC)  $(CFLAGS) -c -o $@ $<
@@ -44,10 +42,10 @@ run: all
 	$(OUTDIR)/$(PROJECT) $(ARGS)
 
 
-__clean:
-	-$(RM) $(OUTDIR)
-	-$(RM) $(OBJDIR)
+rmdirectories:
+	@-$(RM) $(OUTDIR)
+	@-$(RM) $(OBJDIR)
 
-rebuild: __clean all
+rebuild: rmdirectories all
 
 clean: rebuild
