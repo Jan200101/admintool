@@ -33,13 +33,13 @@ bool menuentry::runinput()
 
     std::cin >> input;
     --input;
+    std::cout << std::endl;
     if (input == (unsigned long)-1) return 1;
-
     if (this->size >= input) runfunction(input);
     return 0;
 }
 
-void menuentry::printtext()
+void menuentry::printtext(std::string exittext)
 {
     if (DEBUG) std::cout << "[DEBUG] PRINTTEXT" << std::endl;
 
@@ -49,5 +49,10 @@ void menuentry::printtext()
     {
         std::cout << i + 1 << std::left << std::setw(2) << '.' << this->menutext[i] << std::endl;
     }
-    std::cout << "0. Zurück" << std::endl;
+    std::cout << "0. " << exittext << std::endl;
+}
+
+void menuentry::printtext()
+{
+    this->printtext("Zurück");
 }
