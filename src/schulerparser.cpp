@@ -13,7 +13,8 @@
 #define NOGETNR 0   // stop getNr DEBUG, useful when appening student entries
 
 // keep this enabled or disabled all the time DO NOT SWITCH AROUND ALL THE TIME
-#define HASHPASS 1 // Hash passwords with sha512
+// passwords are hashed with a included sha512 library
+#define HASHPASS 1
 
 // Schuler Class
 void Schuler::init(unsigned short nr, unsigned short permissionlevel,
