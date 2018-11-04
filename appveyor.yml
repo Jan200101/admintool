@@ -1,4 +1,4 @@
-version: 1.0.{build}
+version: 1.0.{build}-{branch}
 
 image: Ubuntu1804
 
@@ -7,11 +7,7 @@ environment:
   - R_VERSION: release
     R_ARCH: x64
   - R_VERSION: release
-  - R_VERSION: devel
-    GCC_PATH: mingw_64
-    R_ARCH: x64
-  - R_VERSION: devel
-    GCC_PATH: mingw_32
+    R_ARCH: x86
 
 build_script:
-  - sh: make clean TYPE=Release
+  - sh: make TYPE=Release
