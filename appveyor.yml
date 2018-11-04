@@ -1,25 +1,17 @@
 version: 1.0.{build}
 
-branches:
-  only:
-    - master
+image: Ubuntu1804
 
 environment:
-  global:
-    WARNINGS_ARE_ERRORS: 1
-
   matrix:
+  - R_VERSION: release
+    R_ARCH: x64
+  - R_VERSION: release
+  - R_VERSION: devel
+    GCC_PATH: mingw_64
+    R_ARCH: x64
   - R_VERSION: devel
     GCC_PATH: mingw_32
 
-  - R_VERSION: devel
-    R_ARCH: x64
-    GCC_PATH: mingw_64
-
-  - R_VERSION: release
-    R_ARCH: x64
-
-  - R_VERSION: stable
-
 build_script:
-  make clean TYPE=Release
+  - sh: make clean TYPE=Release
