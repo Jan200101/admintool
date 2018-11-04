@@ -87,7 +87,7 @@ unsigned short* Schuler::getGeburtsdatum()
 {
     if (DEBUG) std::cout << "[DEBUG] SCHULER GETGEBURTSDATUM" << std::endl;
     unsigned short* datum = (unsigned short*)std::malloc(3);
-    datum = this->geburtsdatum;
+    *datum = *this->geburtsdatum;
     return datum;
 }
 
