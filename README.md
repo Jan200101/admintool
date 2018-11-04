@@ -1,6 +1,6 @@
 # admintool
 
-[![Build status](https://ci.appveyor.com/api/projects/status/n3a6x6ppcyixyg0l?svg=true)](https://ci.appveyor.com/project/Jan200101/admintool)
+[![Build status](https://ci.appveyor.com/api/projects/status/52q5udemls3s65by?svg=true)](https://ci.appveyor.com/project/Jan200101/admintool)
 
 ### Code from external sources
 [CSVparser](https://sourceforge.net/projects/cccsvparser/)
