@@ -21,6 +21,8 @@ void Schuler::init(unsigned short nr, unsigned short permissionlevel,
                    unsigned short geburtsjahr, unsigned short geburtsmonat, unsigned short geburtstag,
                    std::string username, std::string password)
 {
+    if (DEBUG) std::cout << "[DEBUG] SCHULER INIT" << std::endl;
+
     this->enabled = true;
 
     this->nr = nr;
@@ -59,31 +61,31 @@ void Schuler::init(unsigned short nr, unsigned short permissionlevel,
 
 unsigned short Schuler::getNr()
 {
-    if (DEBUG && !NOGETNR) std::cout << "[DEBUG] GETNR" << std::endl;
+    if (DEBUG && !NOGETNR) std::cout << "[DEBUG] SCHULER GETNR" << std::endl;
     return this->nr;
 }
 
 unsigned short Schuler::getPermission()
 {
-    if (DEBUG) std::cout << "[DEBUG] GETPERMISSION" << std::endl;
+    if (DEBUG) std::cout << "[DEBUG] SCHULER GETPERMISSION" << std::endl;
     return this->permissionlevel;
 }
 
 std::string Schuler::getVorname()
 {
-    if (DEBUG) std::cout << "[DEBUG] GETVORNAME" << std::endl;
+    if (DEBUG) std::cout << "[DEBUG] SCHULER GETVORNAME" << std::endl;
     return this->vorname;
 }
 
 std::string Schuler::getNachname()
 {
-    if (DEBUG) std::cout << "[DEBUG] GETNACHNAME" << std::endl;
+    if (DEBUG) std::cout << "[DEBUG] SCHULER GETNACHNAME" << std::endl;
     return this->nachname;
 }
 
 unsigned short* Schuler::getGeburtsdatum()
 {
-    if (DEBUG) std::cout << "[DEBUG] GETGEBURTSDATUM" << std::endl;
+    if (DEBUG) std::cout << "[DEBUG] SCHULER GETGEBURTSDATUM" << std::endl;
     unsigned short* datum = (unsigned short*)std::malloc(3);
     datum = this->geburtsdatum;
     return datum;
@@ -91,37 +93,37 @@ unsigned short* Schuler::getGeburtsdatum()
 
 unsigned short Schuler::getGeburtsjahr()
 {
-    if (DEBUG) std::cout << "[DEBUG] GETGEBURTSJAHR" << std::endl;
+    if (DEBUG) std::cout << "[DEBUG] SCHULER GETGEBURTSJAHR" << std::endl;
     return this->geburtsdatum[0];
 }
 
 unsigned short Schuler::getGeburtsmonat()
 {
-    if (DEBUG) std::cout << "[DEBUG] GETGEBURTSMONAT" << std::endl;
+    if (DEBUG) std::cout << "[DEBUG] SCHULER GETGEBURTSMONAT" << std::endl;
     return this->geburtsdatum[1];
 }
 
 unsigned short Schuler::getGeburtstag()
 {
-    if (DEBUG) std::cout << "[DEBUG] GETGEBURTSTAG" << std::endl;
+    if (DEBUG) std::cout << "[DEBUG] SCHULER GETGEBURTSTAG" << std::endl;
     return this->geburtsdatum[2];
 }
 
 std::string Schuler::getUsername()
 {
-    if (DEBUG) std::cout << "[DEBUG] GETUSERNAME" << std::endl;
+    if (DEBUG) std::cout << "[DEBUG] SCHULER GETUSERNAME" << std::endl;
     return this->username;
 }
 
 std::string Schuler::getPassword()
 {
-    if (DEBUG) std::cout << "[DEBUG] GETPASSWORD" << std::endl;
+    if (DEBUG) std::cout << "[DEBUG] SCHULER GETPASSWORD" << std::endl;
     return this->password;
 }
 
 void Schuler::setPassword(std::string password)
 {
-    if (DEBUG) std::cout << "[DEBUG] SETPASSWORD" << std::endl;
+    if (DEBUG) std::cout << "[DEBUG] SCHULER SETPASSWORD" << std::endl;
     this->password = password;
 
     if (HASHPASS)
@@ -132,7 +134,7 @@ void Schuler::setPassword(std::string password)
 
 void Schuler::resetPassword()
 {
-    if (DEBUG) std::cout << "[DEBUG] RESETPASSWORD" << std::endl;
+    if (DEBUG) std::cout << "[DEBUG] SCHULER RESETPASSWORD" << std::endl;
     this->password = std::to_string(geburtsdatum[2]) + "." + std::to_string(geburtsdatum[1]) + "." + std::to_string(geburtsdatum[0]);
 }
 
@@ -143,12 +145,13 @@ void Schuler::hashPassword()
 
 void Schuler::hashPassword(std::string& password)
 {
+    if (DEBUG) std::cout << "[DEBUG] SCHULER HASHPASSWORD" << std::endl;
     password = sha512(this->username + password);
 }
 
 bool Schuler::comparePassword(std::string password)
 {
-    if (DEBUG) std::cout << "[DEBUG] COMPAREPASSWORD" << std::endl;
+    if (DEBUG) std::cout << "[DEBUG] SCHULER COMPAREPASSWORD" << std::endl;
     if (HASHPASS) this->hashPassword(password);
 
     if (password == this->password) return 0;
@@ -158,7 +161,7 @@ bool Schuler::comparePassword(std::string password)
 
 void Schuler::makeCSV(CSVWriter& csv)
 {
-    if (DEBUG && !NOMAKECSV) std::cout << "[DEBUG] MAKECSV" << std::endl;
+    if (DEBUG && !NOMAKECSV) std::cout << "[DEBUG] SCHULER MAKECSV" << std::endl;
     csv.newRow() << this->nr << this->permissionlevel
                  << this->vorname << this->nachname
                  << this->geburtsdatum[0] << this->geburtsdatum[1]
@@ -178,7 +181,7 @@ void readSchuler(std::vector<Schuler>& schulerliste)
     // CsvParser_destroy_row(header) ; -> causes error in current version
     while ((row = CsvParser_getRow(csvparser)))
     {
-        if (DEBUG) std::cout << "[DEBUG] READ " << entry << std::endl;
+        if (DEBUG) std::cout << "[DEBUG] SCHULER READ " << entry << std::endl;
 
         char** rowFields = CsvParser_getFields(row);
 
@@ -203,7 +206,7 @@ void writeSchuler(std::vector<Schuler>& schulerliste)
 {
     CSVWriter csv(",");
 
-    if (DEBUG) std::cout << "[DEBUG] WRITE" << std::endl;
+    if (DEBUG) std::cout << "[DEBUG] SCHULER WRITE" << std::endl;
     for (long unsigned int i = 0; i < schulerliste.size(); ++i)
     {
         if (schulerliste[i].enabled)

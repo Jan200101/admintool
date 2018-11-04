@@ -8,6 +8,8 @@
 
 menuentry::menuentry(std::string title, std::vector<std::string> menutext, std::vector<void (*)()> menufunctions)
 {
+    if (DEBUG) std::cout << "[DEBUG] MENUENTRY CONSTRUCTER" << std::endl;
+
     if (menutext.size() != menufunctions.size()) throw std::invalid_argument("menuentry::menuentry vector size does not match");
 
     this->title = title;
@@ -18,7 +20,7 @@ menuentry::menuentry(std::string title, std::vector<std::string> menutext, std::
 
 bool menuentry::runfunction(unsigned long entry)
 {
-    if (DEBUG) std::cout << "[DEBUG] RUNFUNCTION" << std::endl;
+    if (DEBUG) std::cout << "[DEBUG] MENUENTRY RUNFUNCTION" << std::endl;
 
     if (entry >= this->size) return 1;
 
@@ -27,22 +29,22 @@ bool menuentry::runfunction(unsigned long entry)
 }
 bool menuentry::runinput()
 {
-    if (DEBUG) std::cout << "[DEBUG] RUNINPUT" << std::endl;
+    if (DEBUG) std::cout << "[DEBUG] MENUENTRY RUNINPUT" << std::endl;
 
     unsigned long input = 0;
 
     std::cin >> input;
     --input;
-    std::cout << std::endl;
     if (input == (unsigned long)-1) return 1;
-    if (this->size >= input) runfunction(input);
     std::cout << std::endl;
+    if (this->size >= input) runfunction(input);
+
     return 0;
 }
 
 void menuentry::printtext(std::string exittext)
 {
-    if (DEBUG) std::cout << "[DEBUG] PRINTTEXT" << std::endl;
+    if (DEBUG) std::cout << "[DEBUG] MENUENTRY PRINTTEXT" << std::endl;
 
     std::cout << "*** " << this->title << " ***" << std::endl;
 
