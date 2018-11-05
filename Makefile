@@ -19,7 +19,7 @@ MKDIR        = mkdir -p
 RM           = rm -r
 
 
-all: directories $(OUTDIR)/$(PROJECT)
+all: directories $(OUTDIR)/$(PROJECT) loc
 
 directories: $(OBJDIR) $(OUTDIR)
 
@@ -49,3 +49,6 @@ rmdirectories:
 rebuild: rmdirectories all
 
 clean: rebuild
+
+loc:
+	@find . -name '*.cpp' -o -name '*.c' -o -name '*.h'| xargs wc -l
