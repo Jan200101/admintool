@@ -87,17 +87,6 @@ void Schuler::init(unsigned short nr, unsigned short permissionlevel,
 // 3
 void Schuler::init(unsigned short nr, unsigned short permissionlevel,
                    std::string vorname, std::string nachname,
-                   unsigned short geburtsjahr, unsigned short geburtsmonat, unsigned short geburtstag)
-{
-    this->init(nr, permissionlevel,
-               vorname, nachname,
-               geburtsjahr, geburtsmonat, geburtstag,
-               "", "");
-}
-
-// 4
-void Schuler::init(unsigned short nr, unsigned short permissionlevel,
-                   std::string vorname, std::string nachname,
                    unsigned short geburtsjahr, unsigned short geburtsmonat, unsigned short geburtstag,
                    std::vector<Schuler>& schulerliste)
 {
@@ -281,7 +270,8 @@ void appendSchuler(std::vector<Schuler>& schulerliste,
                              permissionlevel,
                              vorname,
                              nachname,
-                             geburtsjahr, geburtsmonat, geburtstag);
+                             geburtsjahr, geburtsmonat, geburtstag,
+                             schulerliste);
 }
 
 void disableSchuler(Schuler& entry)

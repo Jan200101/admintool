@@ -40,11 +40,6 @@ class Schuler
     // 3
     void init(unsigned short nr, unsigned short permissionlevel,
               std::string vorname, std::string nachname,
-              unsigned short geburtsjahr, unsigned short geburtsmonat, unsigned short geburtstag);
-
-    // 4
-    void init(unsigned short nr, unsigned short permissionlevel,
-              std::string vorname, std::string nachname,
               unsigned short geburtsjahr, unsigned short geburtsmonat, unsigned short geburtstag,
               std::vector<Schuler>& schulerliste);
 

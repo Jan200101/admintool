@@ -84,7 +84,10 @@ void schulerlisten()
             << schulerliste[y].getNr() << ' '
             << schulerliste[y].getVorname() << ' '
             << schulerliste[y].getNachname() << ' '
-            << schulerliste[y].getGeburtsdatum()[0] << ' '
+            << schulerliste[y].getGeburtstag() << ' '
+            << schulerliste[y].getGeburtsmonat() << ' '
+            << schulerliste[y].getGeburtsjahr() << ' '
+            << schulerliste[y].getUsername() << ' '
             << '\n'; // TODO make fancy
     }
     std::cout << std::endl;
