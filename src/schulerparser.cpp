@@ -17,6 +17,7 @@
 #define HASHPASS 1
 
 // Schuler Class
+// 1
 void Schuler::init(unsigned short nr, unsigned short permissionlevel,
                    std::string vorname, std::string nachname,
                    unsigned short geburtsjahr, unsigned short geburtsmonat, unsigned short geburtstag,
@@ -39,7 +40,7 @@ void Schuler::init(unsigned short nr, unsigned short permissionlevel,
 
     if (username.empty())
     {
-        username = this->vorname + '.' + this->nachname;
+        username = vorname + '.' + nachname;
     }
     this->username = username;
     if (password.empty())
@@ -50,6 +51,40 @@ void Schuler::init(unsigned short nr, unsigned short permissionlevel,
     this->password = password;
 }
 
+// 2
+void Schuler::init(unsigned short nr, unsigned short permissionlevel,
+                   std::string vorname, std::string nachname,
+                   unsigned short geburtsjahr, unsigned short geburtsmonat, unsigned short geburtstag,
+                   std::string username, std::string password,
+                   std::vector<Schuler>& schulerliste)
+{
+    unsigned short number = 0;
+    std::string name;
+
+    if (username.empty())
+    {
+        username = vorname + '.' + nachname;
+    }
+
+    name = username; // use name as temporary storage
+
+    for (unsigned int i = 0; i < schulerliste.size(); ++i)
+    {
+        if (schulerliste[i].username == username)
+        {
+            ++number;
+            username = name + std::to_string(number);
+            i = 0;
+        }
+    }
+
+    this->init(nr, permissionlevel,
+               vorname, nachname,
+               geburtsjahr, geburtsmonat, geburtstag,
+               username, password);
+}
+
+// 3
 void Schuler::init(unsigned short nr, unsigned short permissionlevel,
                    std::string vorname, std::string nachname,
                    unsigned short geburtsjahr, unsigned short geburtsmonat, unsigned short geburtstag)
@@ -58,6 +93,19 @@ void Schuler::init(unsigned short nr, unsigned short permissionlevel,
                vorname, nachname,
                geburtsjahr, geburtsmonat, geburtstag,
                "", "");
+}
+
+// 4
+void Schuler::init(unsigned short nr, unsigned short permissionlevel,
+                   std::string vorname, std::string nachname,
+                   unsigned short geburtsjahr, unsigned short geburtsmonat, unsigned short geburtstag,
+                   std::vector<Schuler>& schulerliste)
+{
+    this->init(nr, permissionlevel,
+               vorname, nachname,
+               geburtsjahr, geburtsmonat, geburtstag,
+               "", "",
+               schulerliste);
 }
 
 unsigned short Schuler::getNr()

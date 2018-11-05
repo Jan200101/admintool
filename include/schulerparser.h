@@ -24,14 +24,29 @@ class Schuler
    public:
     bool enabled = false;
 
+    // 1
     void init(unsigned short nr, unsigned short permissionlevel,
               std::string vorname, std::string nachname,
               unsigned short geburtsjahr, unsigned short geburtsmonat, unsigned short geburtstag,
               std::string username, std::string password);
 
+    // 2
+    void init(unsigned short nr, unsigned short permissionlevel,
+              std::string vorname, std::string nachname,
+              unsigned short geburtsjahr, unsigned short geburtsmonat, unsigned short geburtstag,
+              std::string username, std::string password,
+              std::vector<Schuler>& schulerliste);
+
+    // 3
     void init(unsigned short nr, unsigned short permissionlevel,
               std::string vorname, std::string nachname,
               unsigned short geburtsjahr, unsigned short geburtsmonat, unsigned short geburtstag);
+
+    // 4
+    void init(unsigned short nr, unsigned short permissionlevel,
+              std::string vorname, std::string nachname,
+              unsigned short geburtsjahr, unsigned short geburtsmonat, unsigned short geburtstag,
+              std::vector<Schuler>& schulerliste);
 
     unsigned short getNr();
     unsigned short getPermission();

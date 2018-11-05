@@ -5,7 +5,6 @@
 #include "schulerparser.h"
 
 #define DEBUG 0
-
 void menu();
 void schulermenu();
 void schulerlisten();
