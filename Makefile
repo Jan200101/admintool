@@ -19,7 +19,7 @@ MKDIR        = mkdir -p
 RM           = rm -r
 
 
-all: directories $(OUTDIR)/$(PROJECT) loc
+all: directories $(OUTDIR)/$(PROJECT)
 
 directories: $(OBJDIR) $(OUTDIR)
 
