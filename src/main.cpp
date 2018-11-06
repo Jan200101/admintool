@@ -128,7 +128,6 @@ void schulerdeaktivieren()
 {
     bool change = false;
     unsigned short input = 0;
-    Schuler select;
 
     std::cout << "Welche Schuler Nr soll entfernt werden?" << std::endl;
 
