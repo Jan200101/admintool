@@ -66,7 +66,7 @@ void Schuler::init(unsigned short nr,
 
     name = username; // use name as temporary storage
 
-    for (unsigned int i = 0; i < schulerliste.size(); ++i)
+    for (unsigned int i = 0; i < schulerliste.capacity(); ++i)
     {
         if (schulerliste[i].username == username)
         {
@@ -202,7 +202,7 @@ void Schuler::makeCSV(CSVWriter& csv)
 // read CSV into schulerliste
 void readSchuler(std::vector<Schuler>& schulerliste)
 {
-    short entry = 0;
+    unsigned short entry = 0;
     //                                   file, delimiter, first_line_is_header?
     CsvParser* csvparser = CsvParser_new(FILENAME, ",", 0);
     CsvRow* row;
@@ -211,6 +211,8 @@ void readSchuler(std::vector<Schuler>& schulerliste)
     while ((row = CsvParser_getRow(csvparser)))
     {
         if (DEBUG) std::cout << "[DEBUG] SCHULER READ " << entry << std::endl;
+        //schulerliste.reserve(schulerliste.capacity() + 1);
+        schulerliste.resize(entry + 1);
 
         char** rowFields = CsvParser_getFields(row);
 
@@ -227,7 +229,7 @@ void readSchuler(std::vector<Schuler>& schulerliste)
         CsvParser_destroy_row(row);
     }
     CsvParser_destroy(csvparser);
-    writeSchuler(schulerliste);
+    //writeSchuler(schulerliste);
 }
 
 // write schulerliste into CSV
@@ -236,7 +238,7 @@ void writeSchuler(std::vector<Schuler>& schulerliste)
     CSVWriter csv(",");
 
     if (DEBUG) std::cout << "[DEBUG] SCHULER WRITE" << std::endl;
-    for (long unsigned int i = 0; i < schulerliste.size(); ++i)
+    for (long unsigned int i = 0; i < schulerliste.capacity(); ++i)
     {
         if (schulerliste[i].enabled)
         {
@@ -252,6 +254,7 @@ void appendSchuler(std::vector<Schuler>& schulerliste,
                    short geburtsjahr, short geburtsmonat, short geburtstag)
 {
     short entry = 0;
+    schulerliste.resize(schulerliste.size() + 1);
     while (schulerliste[entry].enabled) ++entry;
 
     if (DEBUG) std::cout << "[DEBUG] APPEND " << entry << std::endl;
@@ -261,6 +264,8 @@ void appendSchuler(std::vector<Schuler>& schulerliste,
                              nachname,
                              geburtsjahr, geburtsmonat, geburtstag,
                              schulerliste);
+
+    if (!schulerliste[schulerliste.size() - 1].enabled) schulerliste.resize(schulerliste.size() - 1);
 }
 
 void disableSchuler(Schuler& entry)

@@ -14,7 +14,7 @@ void schulerneuladen();
 void schulerpassvergleich();
 
 // init vector in the global space with Schuler class
-std::vector<Schuler> schulerliste(1000);
+std::vector<Schuler> schulerliste;
 
 // global char to store input into
 char input;
@@ -77,7 +77,7 @@ void schulermenu()
 
 void schulerlisten()
 {
-    for (unsigned long y = 0; y < schulerliste.size(); ++y)
+    for (unsigned long y = 0; y < schulerliste.capacity(); ++y)
     {
         if (!schulerliste[y].enabled) continue;
         std::cout
@@ -90,7 +90,7 @@ void schulerlisten()
             << schulerliste[y].getUsername() << ' '
             << '\n'; // TODO make fancy
     }
-    std::cout << std::endl;
+    std::cout << schulerliste.size() << std::endl;
 }
 
 void schulerhinzufugen()
@@ -131,7 +131,7 @@ void schulerdeaktivieren()
 
     std::cin >> input;
 
-    for (unsigned long i = 0; i < schulerliste.size(); ++i)
+    for (unsigned long i = 0; i < schulerliste.capacity(); ++i)
     {
         if (input == schulerliste[i].getNr())
         {
@@ -146,7 +146,7 @@ void schulerdeaktivieren()
 
 void schulerneuladen()
 {
-    for (unsigned long i = 0; i < schulerliste.size(); ++i)
+    for (unsigned long i = 0; i < schulerliste.capacity(); ++i)
     {
         if (schulerliste[i].enabled) disableSchuler(schulerliste[i]);
     }
@@ -168,7 +168,7 @@ void schulerpassvergleich()
 
     std::cin >> password;
 
-    for (unsigned long i = 0; i < schulerliste.size(); ++i)
+    for (unsigned long i = 0; i < schulerliste.capacity(); ++i)
     {
         if (input == schulerliste[i].getNr())
         {
