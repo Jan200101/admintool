@@ -160,7 +160,7 @@ void schulerpassvergleich()
     std::string password = "";
     Schuler select;
 
-    std::cout << "Welche Schuler Nr soll entfernt werden?" << std::endl;
+    std::cout << "Wessen Schülers Nr soll das Password verglichen werden?" << std::endl;
 
     std::cin >> input;
 
@@ -175,36 +175,12 @@ void schulerpassvergleich()
             if (!schulerliste[i].comparePassword(password)) status = true;
         }
     }
-    if (status)
+
+    std::cout << "Password stimmt";
+    if (!status)
     {
-        std::cout << "Password stimmt" << std::endl;
+        std::cout << " nicht";
     }
+    std::cout << std::endl
+              << std::endl;
 }
-
-/*
-void example()
-{
-    // init vector with Schuler class
-    std::vector<Schuler> schulerliste(50); // 50 should be enough I am not going into dynamic memory allocation for this shit
-
-    // read CSV into schulerliste
-    // FILENAME defiend in schulerparser.h
-    //         Schuler vector
-    readSchuler(schulerliste);
-
-    // add entry to schulerlist
-    //     Schuler vector, permission, Name, LastName, Birth Y/M/D
-    appendSchuler(schulerliste, 0, "Avor", "Bnach", 1999, 3, 21);
-
-    // disable Schuler
-    // DISABLING THE LAST USER MAKES THAT USER ID REUSABLE
-    //             Schuler
-    disableSchuler(schulerliste[0]);
-
-    // write schulerliste onto CSV
-    //          Schuler vector
-    writeSchuler(schulerliste);
-
-    if (DEBUG) std::cout << "[DEBUG]DONE" << std::endl;
-}
-*/
