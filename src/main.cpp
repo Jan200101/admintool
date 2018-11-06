@@ -5,6 +5,7 @@
 #include "schulerparser.h"
 
 #define DEBUG 0
+
 void menu();
 void schulermenu();
 void schulerlisten();
@@ -90,7 +91,9 @@ void schulerlisten()
             << schulerliste[y].getUsername() << ' '
             << '\n'; // TODO make fancy
     }
-    std::cout << schulerliste.size() << std::endl;
+    if (DEBUG) std::cout << "STACK SIZE " << schulerliste.size() << std::endl;
+
+    std::cout << std::endl;
 }
 
 void schulerhinzufugen()
