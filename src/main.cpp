@@ -14,7 +14,7 @@ void schulerneuladen();
 void schulerpassvergleich();
 
 // init vector in the global space with Schuler class
-std::vector<Schuler> schulerliste(5000);
+std::vector<Schuler> schulerliste(1000);
 
 // global char to store input into
 char input;
