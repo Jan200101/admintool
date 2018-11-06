@@ -10,10 +10,10 @@ menuentry::menuentry(std::string title, std::vector<std::string> menutext, std::
 {
     if (DEBUG) std::cout << "[DEBUG] MENUENTRY CONSTRUCTER" << std::endl;
 
-    if (menutext.capacity() != menufunctions.capacity()) throw std::invalid_argument("menuentry::menuentry vector size does not match");
+    if (menutext.size() != menufunctions.size()) throw std::invalid_argument("menuentry::menuentry vector size does not match");
 
     this->title = title;
-    this->size = menutext.capacity();
+    this->size = menutext.size();
     this->menutext = menutext;
     this->menufunctions = menufunctions;
 }

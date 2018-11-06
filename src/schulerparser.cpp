@@ -66,7 +66,7 @@ void Schuler::init(unsigned short nr,
 
     name = username; // use name as temporary storage
 
-    for (unsigned int i = 0; i < schulerliste.capacity(); ++i)
+    for (unsigned int i = 0; i < schulerliste.size(); ++i)
     {
         if (schulerliste[i].username == username)
         {
@@ -211,7 +211,7 @@ void readSchuler(std::vector<Schuler>& schulerliste)
     while ((row = CsvParser_getRow(csvparser)))
     {
         if (DEBUG) std::cout << "[DEBUG] SCHULER READ " << entry << std::endl;
-        //schulerliste.reserve(schulerliste.capacity() + 1);
+        //schulerliste.reserve(schulerliste.size() + 1);
         schulerliste.resize(entry + 1);
 
         char** rowFields = CsvParser_getFields(row);
@@ -238,7 +238,7 @@ void writeSchuler(std::vector<Schuler>& schulerliste)
     CSVWriter csv(",");
 
     if (DEBUG) std::cout << "[DEBUG] SCHULER WRITE" << std::endl;
-    for (long unsigned int i = 0; i < schulerliste.capacity(); ++i)
+    for (long unsigned int i = 0; i < schulerliste.size(); ++i)
     {
         if (schulerliste[i].enabled)
         {

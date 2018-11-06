@@ -78,7 +78,7 @@ void schulermenu()
 
 void schulerlisten()
 {
-    for (unsigned long y = 0; y < schulerliste.capacity(); ++y)
+    for (unsigned long y = 0; y < schulerliste.size(); ++y)
     {
         if (!schulerliste[y].enabled) continue;
         std::cout
@@ -134,7 +134,7 @@ void schulerdeaktivieren()
 
     std::cin >> input;
 
-    for (unsigned long i = 0; i < schulerliste.capacity(); ++i)
+    for (unsigned long i = 0; i < schulerliste.size(); ++i)
     {
         if (input == schulerliste[i].getNr())
         {
@@ -149,7 +149,7 @@ void schulerdeaktivieren()
 
 void schulerneuladen()
 {
-    for (unsigned long i = 0; i < schulerliste.capacity(); ++i)
+    for (unsigned long i = 0; i < schulerliste.size(); ++i)
     {
         if (schulerliste[i].enabled) disableSchuler(schulerliste[i]);
     }
@@ -171,7 +171,7 @@ void schulerpassvergleich()
 
     std::cin >> password;
 
-    for (unsigned long i = 0; i < schulerliste.capacity(); ++i)
+    for (unsigned long i = 0; i < schulerliste.size(); ++i)
     {
         if (input == schulerliste[i].getNr())
         {
