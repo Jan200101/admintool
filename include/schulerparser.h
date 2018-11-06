@@ -9,7 +9,6 @@ class Schuler
 {
    private:
     unsigned short nr = 0;
-    unsigned short permissionlevel = 0;
 
     std::string vorname = "";
     std::string nachname = "";
@@ -25,20 +24,20 @@ class Schuler
     bool enabled = false;
 
     // 1
-    void init(unsigned short nr, unsigned short permissionlevel,
+    void init(unsigned short nr,
               std::string vorname, std::string nachname,
               unsigned short geburtsjahr, unsigned short geburtsmonat, unsigned short geburtstag,
               std::string username, std::string password);
 
     // 2
-    void init(unsigned short nr, unsigned short permissionlevel,
+    void init(unsigned short nr,
               std::string vorname, std::string nachname,
               unsigned short geburtsjahr, unsigned short geburtsmonat, unsigned short geburtstag,
               std::string username, std::string password,
               std::vector<Schuler>& schulerliste);
 
     // 3
-    void init(unsigned short nr, unsigned short permissionlevel,
+    void init(unsigned short nr,
               std::string vorname, std::string nachname,
               unsigned short geburtsjahr, unsigned short geburtsmonat, unsigned short geburtstag,
               std::vector<Schuler>& schulerliste);
@@ -71,7 +70,6 @@ void readSchuler(std::vector<Schuler>& schulerliste);
 void writeSchuler(std::vector<Schuler>& schulerliste);
 
 void appendSchuler(std::vector<Schuler>& schulerliste,
-                   unsigned int permissionlevel,
                    std::string vorname, std::string nachname,
                    short geburtsjahr, short geburtsmonat, short geburtstag);
 

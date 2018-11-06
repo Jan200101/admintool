@@ -18,7 +18,7 @@
 
 // Schuler Class
 // 1
-void Schuler::init(unsigned short nr, unsigned short permissionlevel,
+void Schuler::init(unsigned short nr,
                    std::string vorname, std::string nachname,
                    unsigned short geburtsjahr, unsigned short geburtsmonat, unsigned short geburtstag,
                    std::string username, std::string password)
@@ -28,8 +28,6 @@ void Schuler::init(unsigned short nr, unsigned short permissionlevel,
     this->enabled = true;
 
     this->nr = nr;
-
-    this->permissionlevel = permissionlevel;
 
     this->vorname = vorname;
     this->nachname = nachname;
@@ -52,7 +50,7 @@ void Schuler::init(unsigned short nr, unsigned short permissionlevel,
 }
 
 // 2
-void Schuler::init(unsigned short nr, unsigned short permissionlevel,
+void Schuler::init(unsigned short nr,
                    std::string vorname, std::string nachname,
                    unsigned short geburtsjahr, unsigned short geburtsmonat, unsigned short geburtstag,
                    std::string username, std::string password,
@@ -78,19 +76,19 @@ void Schuler::init(unsigned short nr, unsigned short permissionlevel,
         }
     }
 
-    this->init(nr, permissionlevel,
+    this->init(nr,
                vorname, nachname,
                geburtsjahr, geburtsmonat, geburtstag,
                username, password);
 }
 
 // 3
-void Schuler::init(unsigned short nr, unsigned short permissionlevel,
+void Schuler::init(unsigned short nr,
                    std::string vorname, std::string nachname,
                    unsigned short geburtsjahr, unsigned short geburtsmonat, unsigned short geburtstag,
                    std::vector<Schuler>& schulerliste)
 {
-    this->init(nr, permissionlevel,
+    this->init(nr,
                vorname, nachname,
                geburtsjahr, geburtsmonat, geburtstag,
                "", "",
@@ -101,12 +99,6 @@ unsigned short Schuler::getNr()
 {
     if (DEBUG && !NOGETNR) std::cout << "[DEBUG] SCHULER GETNR" << std::endl;
     return this->nr;
-}
-
-unsigned short Schuler::getPermission()
-{
-    if (DEBUG) std::cout << "[DEBUG] SCHULER GETPERMISSION" << std::endl;
-    return this->permissionlevel;
 }
 
 std::string Schuler::getVorname()
@@ -200,8 +192,7 @@ bool Schuler::comparePassword(std::string password)
 void Schuler::makeCSV(CSVWriter& csv)
 {
     if (DEBUG && !NOMAKECSV) std::cout << "[DEBUG] SCHULER MAKECSV" << std::endl;
-    csv.newRow() << this->nr << this->permissionlevel
-                 << this->vorname << this->nachname
+    csv.newRow() << this->nr << this->vorname << this->nachname
                  << this->geburtsdatum[0] << this->geburtsdatum[1]
                  << this->geburtsdatum[2] << this->username << this->password;
 }
@@ -224,19 +215,19 @@ void readSchuler(std::vector<Schuler>& schulerliste)
         char** rowFields = CsvParser_getFields(row);
 
         schulerliste[entry].init(atoi(rowFields[0]),
-                                 atoi(rowFields[1]),
+                                 std::string(rowFields[1]),
                                  std::string(rowFields[2]),
-                                 std::string(rowFields[3]),
+                                 atoi(rowFields[3]),
                                  atoi(rowFields[4]),
                                  atoi(rowFields[5]),
-                                 atoi(rowFields[6]),
-                                 std::string(rowFields[7]),
-                                 std::string(rowFields[8]));
+                                 std::string(rowFields[6]),
+                                 std::string(rowFields[7]));
         ++entry;
 
         CsvParser_destroy_row(row);
     }
     CsvParser_destroy(csvparser);
+    writeSchuler(schulerliste);
 }
 
 // write schulerliste into CSV
@@ -257,7 +248,6 @@ void writeSchuler(std::vector<Schuler>& schulerliste)
 
 // append to schulerliste
 void appendSchuler(std::vector<Schuler>& schulerliste,
-                   unsigned int permissionlevel,
                    std::string vorname, std::string nachname,
                    short geburtsjahr, short geburtsmonat, short geburtstag)
 {
@@ -267,7 +257,6 @@ void appendSchuler(std::vector<Schuler>& schulerliste,
     if (DEBUG) std::cout << "[DEBUG] APPEND " << entry << std::endl;
 
     schulerliste[entry].init(schulerliste[entry - 1].getNr() + 1,
-                             permissionlevel,
                              vorname,
                              nachname,
                              geburtsjahr, geburtsmonat, geburtstag,

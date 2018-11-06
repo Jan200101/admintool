@@ -4,7 +4,6 @@
 	<Project>
 		<Option title="admintool" />
 		<Option platforms="Windows;Unix;" />
-		<Option makefile_is_custom="1" />
 		<Option pch_mode="2" />
 		<Option compiler="gcc" />
 		<Build>
@@ -13,6 +12,10 @@
 				<Option object_output="obj/Debug/" />
 				<Option type="1" />
 				<Option compiler="gcc" />
+				<Option projectCompilerOptionsRelation="0" />
+				<Compiler>
+					<Add option="-Isrc -Iinclude" />
+				</Compiler>
 				<MakeCommands>
 					<Build command="$make -f $makefile TYPE=$target" />
 					<CompileFile command="$make -f $makefile TYPE=$target" />
@@ -28,30 +31,27 @@
 				<Option type="1" />
 				<Option compiler="gcc" />
 				<Option use_console_runner="0" />
-				<MakeCommands>
-					<Build command="$make -f $makefile TYPE=$target" />
-					<CompileFile command="$make -f $makefile TYPE=$target" />
-					<Clean command="$make -f $makefile clean TYPE=$target" />
-					<DistClean command="$make -f $makefile clean TYPE=$target" />
-					<AskRebuildNeeded command="$make -q -f $makefile TYPE=$target" />
-					<SilentBuild command="$make -f $makefile TYPE=$target &gt; $(CMD_NULL)" />
-				</MakeCommands>
+				<Option projectCompilerOptionsRelation="0" />
 			</Target>
 		</Build>
 		<Compiler>
-			<Add option="-Weverything" />
-			<Add option="-fexceptions" />
+			<Add option="-std=c++11" />
+			<Add option="-std=c11" />
+			<Add option="-Iinclude -Isrc -g -Wall -Wextra -Winit-self -Wuninitialized -Wpointer-arith -Wcast-align -Wunreachable-code" />
 		</Compiler>
-		<Unit filename="Makefile" />
 		<Unit filename="include/CSVparser.h" />
+		<Unit filename="include/menu.h" />
 		<Unit filename="include/schulerparser.h" />
+		<Unit filename="include/sha512.h" />
 		<Unit filename="res/test.csv" />
 		<Unit filename="src/CSVparser.c">
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="src/CSVwriter.cpp" />
 		<Unit filename="src/main.cpp" />
+		<Unit filename="src/menu.cpp" />
 		<Unit filename="src/schulerparser.cpp" />
+		<Unit filename="src/sha512.cpp" />
 		<Extensions>
 			<code_completion />
 			<debugger />

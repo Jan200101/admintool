@@ -14,7 +14,7 @@ void schulerneuladen();
 void schulerpassvergleich();
 
 // init vector in the global space with Schuler class
-std::vector<Schuler> schulerliste(50); // 50 should be enough I am not going into dynamic memory allocation for this shit
+std::vector<Schuler> schulerliste(5000);
 
 // global char to store input into
 char input;
@@ -116,7 +116,7 @@ void schulerhinzufugen()
     std::cout << "Tag" << std::endl;
     std::cin >> geburtstag;
 
-    appendSchuler(schulerliste, 0, vorname, nachname, geburtsjahr, geburtsmonat, geburtstag);
+    appendSchuler(schulerliste, vorname, nachname, geburtsjahr, geburtsmonat, geburtstag);
 
     writeSchuler(schulerliste);
 }
