@@ -229,7 +229,7 @@ void readSchuler(std::vector<Schuler>& schulerliste)
         CsvParser_destroy_row(row);
     }
     CsvParser_destroy(csvparser);
-    //writeSchuler(schulerliste);
+    writeSchuler(schulerliste);
 }
 
 // write schulerliste into CSV
