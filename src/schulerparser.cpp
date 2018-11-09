@@ -8,7 +8,10 @@
 #include "CSVwriter.cpp"
 #include "sha512.h"
 
+#ifndef DEBUG
 #define DEBUG 0
+#endif
+
 #define NOMAKECSV 0 // stop makeCSV DEBUG, useful tesing anything
 #define NOGETNR 0   // stop getNr DEBUG, useful when appening student entries
 

@@ -4,7 +4,9 @@
 #include "menu.h"
 #include "schulerparser.h"
 
+#ifndef DEBUG
 #define DEBUG 0
+#endif
 
 void menu();
 void schulermenu();

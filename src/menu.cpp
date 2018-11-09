@@ -4,7 +4,9 @@
 #include <string>
 #include <vector>
 
+#ifndef DEBUG
 #define DEBUG 0
+#endif
 
 menuentry::menuentry(std::string title, std::vector<std::string> menutext, std::vector<void (*)()> menufunctions)
 {
