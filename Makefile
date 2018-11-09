@@ -15,9 +15,9 @@ CC_SRC_FILES  := $(wildcard $(SRC_DIR)/*.c)
 OBJ_FILES     := $(patsubst $(SRC_DIR)/%.cpp,$(OBJ_DIR)/%.o,$(CXX_SRC_FILES)) \
                  $(patsubst $(SRC_DIR)/%.c,$(OBJ_DIR)/%.o,$(CC_SRC_FILES))
 
-COMMONFLAGS    = -I$(INC_DIR) -I$(SRC_DIR)
-COMMONFLAGS   += -g -Wall -Wextra -Winit-self -Wuninitialized -Wpointer-arith -Wcast-align -Wunreachable-code --ansi -Wpedantic
-COMMONFLAGS   += $(FLAGS)
+LIBS          := -I$(INC_DIR) -I$(SRC_DIR)
+COMMONFLAGS    = -g -Wall -Wextra -Winit-self -Wuninitialized -Wpointer-arith -Wcast-align -Wunreachable-code --ansi -Wpedantic
+COMMONFLAGS   += $(FLAGS) $(LIBS)
 CFLAGS        := $(COMMONFLAGS) --std=c11
 CXXFLAGS      := $(COMMONFLAGS) --std=c++11
 
