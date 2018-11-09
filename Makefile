@@ -1,54 +1,61 @@
-
-CC          ?= gcc
-CXX         ?= g++
-
-OUTDIR       = bin/$(TYPE)
-OBJDIR       = obj/$(TYPE)
-SOURCEDIR    = src
-INCLUDEDIR   = include
-
-COMMONFLAGS  = -I$(INCLUDEDIR) -I$(SOURCEDIR) -g -Wall -Wextra -Winit-self -Wuninitialized -Wpointer-arith -Wcast-align -Wunreachable-code --ansi -Wpedantic
-COMMONFLAGS += $(FLAGS)
-CFLAGS       = $(COMMONFLAGS) --std=c11
-CXXFLAGS     = $(COMMONFLAGS) --std=c++11
-
-PROJECT      = admintool
+PROJECT      = $(shell basename $(CURDIR))
 TYPE         = Debug
 
-MKDIR        = mkdir -p
-RM           = rm -r
+CC            ?= gcc
+CXX           ?= g++
 
+OUT_DIR        = bin/$(TYPE)
+OBJ_DIR        = obj/$(TYPE)
+SRC_DIR        = src
+INC_DIR        = include
 
-all: directories $(OUTDIR)/$(PROJECT)
+CXX_SRC_FILES := $(wildcard $(SRC_DIR)/*.cpp)
+CC_SRC_FILES  := $(wildcard $(SRC_DIR)/*.c)
 
-directories: $(OBJDIR) $(OUTDIR)
+OBJ_FILES     := $(patsubst $(SRC_DIR)/%.cpp,$(OBJ_DIR)/%.o,$(CXX_SRC_FILES)) \
+                 $(patsubst $(SRC_DIR)/%.c,$(OBJ_DIR)/%.o,$(CC_SRC_FILES))
 
-$(OUTDIR):
-	@$(MKDIR) $(OUTDIR)
+COMMONFLAGS    = -I$(INC_DIR) -I$(SRC_DIR)
+COMMONFLAGS   += -g -Wall -Wextra -Winit-self -Wuninitialized -Wpointer-arith -Wcast-align -Wunreachable-code --ansi -Wpedantic
+COMMONFLAGS   += $(FLAGS)
+CFLAGS        := $(COMMONFLAGS) --std=c11
+CXXFLAGS      := $(COMMONFLAGS) --std=c++11
 
-$(OBJDIR):
-	@$(MKDIR) $(OBJDIR)
+MKDIR         := mkdir -p
+RM            := rm -r
 
-$(OBJDIR)/%.o: $(SOURCEDIR)/%.c
+default_target: directories all
+
+all: $(OUT_DIR)/$(PROJECT)
+
+directories: $(OBJ_DIR) $(OUT_DIR)
+
+$(OUT_DIR):
+	@$(MKDIR) $(OUT_DIR)
+
+$(OBJ_DIR):
+	@$(MKDIR) $(OBJ_DIR)
+
+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
 	$(CC)  $(CFLAGS) -c -o $@ $<
 
-$(OBJDIR)/%.o: $(SOURCEDIR)/%.cpp
+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp
 	$(CXX) $(CXXFLAGS) -c -o $@ $<
 
-$(OUTDIR)/$(PROJECT): $(OBJDIR)/main.o $(OBJDIR)/menu.o $(OBJDIR)/sha512.o $(OBJDIR)/schulerparser.o $(OBJDIR)/CSVparser.o $(OBJDIR)/CSVwriter.o
-	$(CXX) $(CXXFLAGS) -o $(OUTDIR)/$(PROJECT) $^
+$(OUT_DIR)/$(PROJECT): $(OBJ_FILES)
+	$(CXX) $(CXXFLAGS) -o $(OUT_DIR)/$(PROJECT) $^
 
 run: all
-	$(OUTDIR)/$(PROJECT) $(ARGS)
+	$(OUT_DIR)/$(PROJECT) $(ARGS)
 
 
 rmdirectories:
-	@-$(RM) $(OUTDIR)
-	@-$(RM) $(OBJDIR)
+	-$(RM) $(OUT_DIR)
+	-$(RM) $(OBJ_DIR)
 
-rebuild: rmdirectories all
+rebuild: rmdirectories directories all
 
 clean: rebuild
 
 loc:
-	@find . -name '*.cpp' -o -name '*.c' -o -name '*.h'| xargs wc -l
+	-find . -name '*.cpp' -o -name '*.c' -o -name '*.h'| xargs wc -l
