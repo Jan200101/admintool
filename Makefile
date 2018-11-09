@@ -35,9 +35,6 @@ default_target: directories all
 
 all: $(OUT_DIR)/$(TARGET)/$(PROJECT)
 
-debug: TARGET = Debug
-debug: all
-
 directories:
 	@$(MKDIR) $(OUT_DIR)/$(TARGET)
 	@$(MKDIR) $(OBJ_DIR)/$(TARGET)
