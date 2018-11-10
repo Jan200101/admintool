@@ -1,9 +1,17 @@
 PROJECT         := $(shell basename $(CURDIR))
 DEBUG           ?= 0
+VERBOSE         ?= 1
+
 ifeq ($(DEBUG), 1)
     TARGET      := Debug
 else
     TARGET      := Release
+endif
+
+ifeq ($(VERBOSE), 1)
+    PREFIX      := @
+else
+    PREFIX      :=
 endif
 
 OUT_DIR          = bin
@@ -36,20 +44,20 @@ default_target: directories all
 all: $(OUT_DIR)/$(TARGET)/$(PROJECT)
 
 directories:
-	@$(MKDIR) $(OUT_DIR)/$(TARGET)
-	@$(MKDIR) $(OBJ_DIR)/$(TARGET)
+	$(PREFIX)$(MKDIR) $(OUT_DIR)/$(TARGET)
+	$(PREFIX)$(MKDIR) $(OBJ_DIR)/$(TARGET)
 
 $(OBJ_DIR)/$(TARGET)/%.o: $(SRC_DIR)/%.c
 	@echo [CC] $@
-	@$(CC)  $(CFLAGS) -c -o $@ $<
+	$(PREFIX)$(CC)  $(CFLAGS) -c -o $@ $<
 
 $(OBJ_DIR)/$(TARGET)/%.o: $(SRC_DIR)/%.cpp
 	@echo [CXX] $@
-	@$(CXX) $(CXXFLAGS) -c -o $@ $<
+	$(PREFIX)$(CXX) $(CXXFLAGS) -c -o $@ $<
 
 $(OUT_DIR)/$(TARGET)/$(PROJECT): $(OBJ_FILES)
 	@echo [CXX] $@
-	@$(CXX) $(CXXFLAGS) -o $@ $^
+	$(PREFIX)$(CXX) $(CXXFLAGS) -o $@ $^
 
 
 rmdirectories:
