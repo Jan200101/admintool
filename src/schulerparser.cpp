@@ -20,6 +20,23 @@
 #define HASHPASS 1
 
 // Schuler Class
+
+Schuler::Schuler()
+{
+    if (DEBUG) std::cout << "[DEBUG] SCHULER CONSTRUCTER" << std::endl;
+    this->vorname = "";
+    this->nachname = "";
+
+    this->geburtsdatum[0] = 0;
+    this->geburtsdatum[1] = 0;
+    this->geburtsdatum[2] = 0;
+
+    this->username = "";
+    this->password = "";
+
+    this->enabled = false;
+}
+
 // 1
 void Schuler::init(unsigned short nr,
                    std::string vorname, std::string nachname,

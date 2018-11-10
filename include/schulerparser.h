@@ -8,20 +8,20 @@ const char FILENAME[] = "res/schuler.csv";
 class Schuler
 {
    private:
-    unsigned short nr = 0;
+    unsigned short nr;
 
-    std::string vorname = "";
-    std::string nachname = "";
+    std::string vorname;
+    std::string nachname;
 
-    unsigned short geburtsdatum[3] = {0, 0, 0};
+    unsigned short geburtsdatum[3];
 
-    std::string username = "";
-    std::string password = ""; // soon to be hashed with sha256
-
-    //time_t time;
+    std::string username;
+    std::string password;
 
    public:
-    bool enabled = false;
+    bool enabled;
+
+    Schuler();
 
     // 1
     void init(unsigned short nr,
