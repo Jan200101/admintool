@@ -1,4 +1,5 @@
 #include "schulerparser.h"
+#include <algorithm>
 #include <cstdlib>
 #include <ctime>
 #include <iostream>
@@ -59,6 +60,7 @@ void Schuler::init(unsigned short nr,
     if (username.empty())
     {
         username = vorname + '.' + nachname;
+        std::transform(username.begin(), username.end(), username.begin(), ::tolower);
     }
     this->username = username;
     if (password.empty())
@@ -82,6 +84,7 @@ void Schuler::init(unsigned short nr,
     if (username.empty())
     {
         username = vorname + '.' + nachname;
+        std::transform(username.begin(), username.end(), username.begin(), ::tolower);
     }
 
     name = username; // use name as temporary storage
