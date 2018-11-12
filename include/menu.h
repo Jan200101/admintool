@@ -6,8 +6,8 @@
 class menuentry
 {
    private:
-    std::string title = "";
-    unsigned long size = 0;
+    std::string title;
+    unsigned long size;
     std::vector<std::string> menutext;
     std::vector<void (*)()> menufunctions;
 
