@@ -1,8 +1,9 @@
 PROJECT         := $(shell basename $(CURDIR))
 DEBUG           ?= 0
+WIN             ?= 0
 VERBOSE         ?= 1
 
-ifeq ($(DEBUG), 1)
+ifneq ($(DEBUG), 0)
     TARGET      := Debug
 else
     TARGET      := Release
@@ -28,7 +29,11 @@ OBJ_FILES       := $(patsubst $(SRC_DIR)/%.cpp,$(OBJ_DIR)/$(TARGET)/%.o,$(CXX_SR
 LIBS            := -I$(INC_DIR) -I$(SRC_DIR)
 COMMONFLAGS      = -Wall -Wextra -Winit-self -Wuninitialized -Wpointer-arith -Wcast-align -Wunreachable-code --ansi -Wpedantic
 COMMONFLAGS     += $(FLAGS) $(LIBS)
-ifeq ($(DEBUG), 1)
+ifneq ($(WIN), 0)
+	COMMONFLAGS += -static
+endif
+
+ifneq ($(DEBUG), 0)
     COMMONFLAGS += -g -DDEBUG
 else
     COMMONFLAGS += -O3
