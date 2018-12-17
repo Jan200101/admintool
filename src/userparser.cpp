@@ -12,7 +12,14 @@ void readUser(std::vector<User>& userliste)
     {
         userliste.resize(entry + 1);
 
-        userliste[entry].init(row[0], row[1], row[2]);
+        if (row.size() == 3)
+        {
+            userliste[entry].init(row[0], row[1], row[2]);
+        }
+        else
+        {
+            userliste[entry].init(row[0], row[1], "");
+        }
     }
     writeUser(userliste);
 }
