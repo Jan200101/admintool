@@ -1,0 +1,6 @@
+bin
+obj
+*.o
+admintool.depend
+admintool.layout
+.directory
