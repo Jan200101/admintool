@@ -9,6 +9,6 @@ std::vector<User> userliste;
 void userneuladen();
 void userlisten();
 void menu();
-int main();
+int main(int argc, char* argv[]);
 
 #endif

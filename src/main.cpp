@@ -1,17 +1,17 @@
 #include "main.hpp"
+#include <cstring>
 #include <iostream>
-#include <string>
 #include "menu.hpp"
 #include "userparser.hpp"
 
-int main()
+int main(int argc, char* argv[])
 {
-    // read CSV into schulerliste
-    // FILENAME defiend in schulerparser.h
-    //         Schuler vector
     readUser(userliste);
 
-    menu();
+    if (argc > 1)
+    {
+        if (strcmp(argv[1], "menu") == 0) menu();
+    }
 
     return 0;
 }
