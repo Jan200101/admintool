@@ -2,9 +2,10 @@
 #include "CSVParser.hpp"
 #include "CSVWriter.hpp"
 
-void readUser(std::vector<User>& userliste)
+std::vector<User> readUser()
 {
     unsigned short entry = 0;
+    std::vector<User> userliste;
     CSVParser csv(FILENAME);
     std::vector<std::string> row;
 
@@ -22,6 +23,7 @@ void readUser(std::vector<User>& userliste)
         }
     }
     writeUser(userliste);
+    return userliste;
 }
 
 void writeUser(std::vector<User>& userliste)

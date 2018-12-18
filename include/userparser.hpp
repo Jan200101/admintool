@@ -5,7 +5,7 @@
 #include <vector>
 #include "user.hpp"
 
-void readUser(std::vector<User>& userliste);
+std::vector<User> readUser();
 
 void writeUser(std::vector<User>& userliste);
 
