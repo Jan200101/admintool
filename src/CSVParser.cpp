@@ -22,25 +22,26 @@ bool CSVParser::eof()
 {
     return this->filestream.eof();
 }
+
 std::vector<std::string> CSVParser::getrow()
 {
-    std::string s;
-    std::vector<std::string> list;
+    std::vector<std::string> values;
 
-    if (!std::getline(this->filestream, s))
+    if (this->eof())
     {
-        return list;
+        return values;
     }
+
+    std::string row;
+    std::getline(this->filestream, row);
 
     size_t pos = 0;
 
-    while ((pos = s.find(this->seperator)) != std::string::npos)
+    while ((pos = row.find(this->seperator)) != std::string::npos)
     {
-        list.resize(list.size() + 1);
-        list[list.size() - 1] = s.substr(0, pos);
-        s.erase(0, pos + this->seperator.length());
+        values.push_back(row.substr(0, pos));
+        row.erase(0, pos + this->seperator.length());
     }
-    list.resize(list.size() + 1);
-    list[list.size() - 1] = s;
-    return list;
+    values.push_back(row);
+    return values;
 }
