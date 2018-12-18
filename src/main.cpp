@@ -4,10 +4,10 @@
 #include "menu.hpp"
 #include "userparser.hpp"
 
+std::vector<User> userliste = readUser();
+
 int main(int argc, char* argv[])
 {
-    readUser(userliste);
-
     if (argc > 1)
     {
         if (strcmp(argv[1], "menu") == 0) menu();
@@ -56,5 +56,5 @@ void userlisten()
 
 void userneuladen()
 {
-    readUser(userliste);
+    userliste = readUser();
 }

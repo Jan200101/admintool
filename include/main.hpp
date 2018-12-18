@@ -4,8 +4,6 @@
 #include <vector>
 #include "user.hpp"
 
-std::vector<User> userliste;
-
 void userneuladen();
 void userlisten();
 void menu();
