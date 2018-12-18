@@ -18,6 +18,8 @@ class CSVParser
     CSVParser(std::string filename);
     CSVParser(std::string filename, std::string seperator);
 
+    bool eof();
+
     std::vector<std::string> getrow();
 };
 

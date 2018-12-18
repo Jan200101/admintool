@@ -18,6 +18,10 @@ CSVParser::CSVParser(std::string filename, std::string seperator)
     this->seperator = seperator;
 }
 
+bool CSVParser::eof()
+{
+    return this->filestream.eof();
+}
 std::vector<std::string> CSVParser::getrow()
 {
     std::string s;
