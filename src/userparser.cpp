@@ -4,13 +4,13 @@
 
 std::vector<User> readUser()
 {
-    unsigned short entry = 0;
     std::vector<User> userliste;
     CSVParser csv(FILENAME);
     std::vector<std::string> row;
 
-    for (; ((row = csv.getrow()).size() != 0); ++entry)
+    for (unsigned short entry = 0; !csv.eof(); ++entry)
     {
+        row = csv.getrow();
         userliste.resize(entry + 1);
 
         if (row.size() == 3)
