@@ -21,6 +21,7 @@ void menu()
     bool running = true;
 
     std::string title = "User";
+    std::string exittext = "Schließen";
 
     std::vector<std::string> text = {
         "Listen",
@@ -34,7 +35,7 @@ void menu()
 
     while (running)
     {
-        menu.printtext();
+        menu.printtext(exittext);
         if (menu.runinput()) running = false;
     }
 }
