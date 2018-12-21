@@ -4,6 +4,10 @@
 #include <vector>
 #include "user.hpp"
 
+#ifndef NOMENU
+#define NOMENU 0
+#endif
+
 void userneuladen();
 void userlisten();
 void menu();

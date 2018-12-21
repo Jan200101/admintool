@@ -4,7 +4,7 @@
 #include <string>
 #include <vector>
 
-menuentry::menuentry(std::string title, std::vector<std::string> menutext, std::vector<void (*)()> menufunctions)
+menuentry::menuentry(std::string title, std::vector<std::string> menutext, std::vector<func> menufunctions)
 {
     if (DEBUG) std::cout << "[DEBUG] MENUENTRY CONSTRUCTER" << std::endl;
 

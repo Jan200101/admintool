@@ -7,13 +7,15 @@
 #include <vector>
 #include "defines.h"
 
+typedef void (*func)();
+
 class menuentry
 {
    private:
     std::string title;
     unsigned long size;
     std::vector<std::string> menutext;
-    std::vector<void (*)()> menufunctions;
+    std::vector<func> menufunctions;
 
    public:
     menuentry(std::string title, std::vector<std::string> menutext, std::vector<void (*)()> menufunctions);
