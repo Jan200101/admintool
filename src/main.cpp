@@ -2,7 +2,6 @@
 #include <cstring>
 #include <fstream>
 #include <iostream>
-#include "menu.hpp"
 #include "userparser.hpp"
 
 std::vector<User> userliste;
