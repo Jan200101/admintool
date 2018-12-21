@@ -8,9 +8,8 @@
 #define NOMENU 0
 #endif
 
-void userneuladen();
-void userlisten();
-void menu();
+bool fexists(const char* filename);
+
 int main(int argc, char* argv[]);
 
 #endif

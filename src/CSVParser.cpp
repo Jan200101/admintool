@@ -43,5 +43,6 @@ std::vector<std::string> CSVParser::getrow()
         row.erase(0, pos + this->seperator.length());
     }
     values.push_back(row);
+    values.shrink_to_fit();
     return values;
 }

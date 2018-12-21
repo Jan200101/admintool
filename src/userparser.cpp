@@ -1,11 +1,12 @@
 #include "userparser.hpp"
+#include <iostream>
 #include "CSVParser.hpp"
 #include "CSVWriter.hpp"
 
-std::vector<User> readUser()
+std::vector<User> readUser(std::string filename)
 {
     std::vector<User> userliste;
-    CSVParser csv(FILENAME);
+    CSVParser csv(filename);
     std::vector<std::string> row;
 
     for (unsigned short entry = 0; !csv.eof(); ++entry)
@@ -22,11 +23,11 @@ std::vector<User> readUser()
             userliste[entry].init(row[0], row[1], "");
         }
     }
-    writeUser(userliste);
+    writeUser(userliste, filename);
     return userliste;
 }
 
-void writeUser(std::vector<User>& userliste)
+void writeUser(std::vector<User>& userliste, std::string filename)
 {
     CSVWriter csv;
 
@@ -35,5 +36,5 @@ void writeUser(std::vector<User>& userliste)
         csv.newRow() << entry.getVorname() << entry.getNachname() << entry.getUsername();
     }
 
-    csv.writeToFile(FILENAME);
+    csv.writeToFile(filename);
 }
