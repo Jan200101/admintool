@@ -3,6 +3,29 @@
 #include "CSVParser.hpp"
 #include "CSVWriter.hpp"
 
+/**
+ * @file userparser.cpp
+ * @brief Source file for user parsing functions
+ *
+ * Contains definitions for user parsing functions
+ */
+
+/**
+ * @return vector of the User class
+ *
+ * Returns a vector containing the User class initialized via the contents of a CSV read by CSVParser
+ */
+std::vector<User> readUser()
+{
+    return readUser(FILENAME);
+}
+
+/**
+ * @param filename string
+ * @return vector of the User class
+ *
+ * Returns a vector containing the User class initialized via the contents of a CSV read by CSVParser
+ */
 std::vector<User> readUser(std::string filename)
 {
     std::vector<User> userliste;
@@ -11,7 +34,7 @@ std::vector<User> readUser(std::string filename)
 
     for (unsigned short entry = 0; !csv.eof(); ++entry)
     {
-        row = csv.getrow();
+        row = csv.getRow();
         userliste.resize(entry + 1);
 
         if (row.size() == 3)
@@ -27,6 +50,22 @@ std::vector<User> readUser(std::string filename)
     return userliste;
 }
 
+/**
+ * @param userliste vector pointer containing the User class
+ *
+ * writes the contents contents of userliste to a CSV file. The default path "res/schuler.csv" is defined in defines.h
+ */
+void writeUser(std::vector<User>& userliste)
+{
+    writeUser(userliste, FILENAME);
+}
+
+/**
+ * @param userliste vector pointer containing the User class
+ * @param filename string
+ *
+ * writes the contents contents of userliste to a CSV file.
+ */
 void writeUser(std::vector<User>& userliste, std::string filename)
 {
     CSVWriter csv;

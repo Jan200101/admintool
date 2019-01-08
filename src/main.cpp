@@ -4,8 +4,22 @@
 #include <iostream>
 #include "userparser.hpp"
 
+/**
+ * @file main.cpp
+ * @brief Source file for various main functions
+ *
+ * Contains definitions for the various functions, including main
+ */
+
+/**
+ * @name userliste
+ * @brief global vector of all user objects
+ */
 std::vector<User> userliste;
 
+/**
+ * @name main
+ */
 int main(int argc, char* argv[])
 {
     if (argc > 1 && fexists(argv[1]))
@@ -28,6 +42,11 @@ int main(int argc, char* argv[])
     return 0;
 }
 
+/**
+ * @param filename constant char pointer
+ *
+ * checks if there is a file under the path
+ */
 bool fexists(const char* filename)
 {
     std::ifstream ifile(filename);

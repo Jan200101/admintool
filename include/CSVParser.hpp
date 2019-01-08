@@ -6,11 +6,24 @@
 #include <vector>
 #include "defines.h"
 
+/**
+ * @file CSVParser.hpp
+ * @brief Header for CSVParser
+ *
+ * Contains declarations for the CSVParser class
+ */
+
+/**
+ * @brief Simple CSV file parsing class
+ *
+ * a simple class designed to parse CSV files
+ * does not support special behavior like quotes
+ */
 class CSVParser
 {
    private:
     std::ifstream filestream;
-    std::string seperator;
+    std::string separator;
 
    public:
     CSVParser();
@@ -20,7 +33,7 @@ class CSVParser
 
     bool eof();
 
-    std::vector<std::string> getrow();
+    std::vector<std::string> getRow();
 };
 
 #endif

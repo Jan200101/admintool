@@ -4,6 +4,18 @@
 #include <string>
 #include "defines.h"
 
+/**
+ * @file user.hpp
+ * @brief Header for the User class
+ *
+ * Contains declarations for the User class
+ */
+
+/**
+ * @brief User class
+ *
+ * a user class to be used to parse first and last names as well as parse and generate usernames
+ */
 class User
 {
    protected:
