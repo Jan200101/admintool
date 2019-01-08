@@ -4,8 +4,22 @@
 #include "menu.hpp"
 #include "userparser.hpp"
 
+/**
+ * @file main.cpp
+ * @brief Source file for various main functions
+ *
+ * Contains definitions for the various functions, including main
+ */
+
+/**
+ * @name userliste
+ * @brief global vector of all user objects
+ */
 std::vector<User> userliste = readUser();
 
+/**
+ * @name main
+ */
 int main(int argc, char* argv[])
 {
     if (argc > 1)
@@ -16,6 +30,10 @@ int main(int argc, char* argv[])
     return 0;
 }
 
+/**
+ * @name menu
+ * @brief main menu function
+ */
 void menu()
 {
     bool running = true;
@@ -31,7 +49,7 @@ void menu()
     std::vector<void (*)()> func = {(&userlisten),
                                     (&userneuladen)};
 
-    menuentry menu(title, text, func);
+    Menuentry menu(title, text, func);
 
     while (running)
     {
@@ -40,6 +58,10 @@ void menu()
     }
 }
 
+/**
+ * @name userlisten
+ * @brief first menu entry
+ */
 void userlisten()
 {
     for (unsigned long y = 0; y < userliste.size(); ++y)
@@ -55,6 +77,10 @@ void userlisten()
     std::cout << std::endl;
 }
 
+/**
+ * @name userneuladen
+ * @brief second menu entry
+ */
 void userneuladen()
 {
     userliste = readUser();

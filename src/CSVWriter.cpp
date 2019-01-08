@@ -1,16 +1,31 @@
 #include "CSVWriter.hpp"
 
+/**
+ * @file CSVWriter.cpp
+ * @brief Source file for CSVWriter
+ *
+ * Contains definitions for the CSVWriter class
+ */
+
+/** 
+ * Default Constructor
+ *
+ * Separator defaults to ";" defined in defines.h
+ */
 CSVWriter::CSVWriter()
 {
     this->firstRow = true;
-    this->seperator = DEFAULTSEPERATOR; // standart seperator
+    this->separator = DEFAULTSEPARATOR;
     this->amount = 0;
 }
 
-CSVWriter::CSVWriter(std::string seperator)
+/**
+ * @param separator set what separator to use.
+ */
+CSVWriter::CSVWriter(std::string separator)
 {
     this->firstRow = true;
-    this->seperator = seperator; // standart seperator
+    this->separator = separator;
     this->amount = 0;
 }
 
@@ -29,11 +44,20 @@ CSVWriter& CSVWriter::add(std::string str)
     return this->add<std::string>(str);
 }
 
+/**
+ * @brief returns the stringstreams content added via the << operator
+ * @return string
+ * @retval stringstream content
+ */
 std::string CSVWriter::toString()
 {
     return this->stream.str();
 }
 
+/**
+ * @return CSVWriter
+ * @retval return class of method
+ */
 CSVWriter& CSVWriter::newRow()
 {
     if (!this->firstRow)
@@ -48,6 +72,12 @@ CSVWriter& CSVWriter::newRow()
     return *this;
 }
 
+/**
+ * @brief returns EOF status
+ * @param filename path to output file
+ * @return bool
+ * @retval 1 if no errors occured otherwise 0
+ */
 bool CSVWriter::writeToFile(std::string filename)
 {
     std::ofstream filestream;

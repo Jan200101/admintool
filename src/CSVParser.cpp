@@ -1,29 +1,53 @@
 #include "CSVParser.hpp"
 #include <iostream>
 
+/**
+ * @file CSVParser.cpp
+ * @brief Source file for CSVParser
+ *
+ * Contains definitions for the CSVParser class
+ */
+
 CSVParser::~CSVParser()
 {
     this->filestream.close();
 }
 
+/**
+ * @param filename set what file to use
+ *
+ * Separator defaults to ";" defined in defines.h
+ */
 CSVParser::CSVParser(std::string filename)
 {
     this->filestream.open(filename);
-    this->seperator = DEFAULTSEPERATOR;
+    this->separator = DEFAULTSEPARATOR;
 }
 
-CSVParser::CSVParser(std::string filename, std::string seperator)
+/**
+ * @param filename set what file to use
+ * @param separator set what separator to use.
+ */
+CSVParser::CSVParser(std::string filename, std::string separator)
 {
     this->filestream.open(filename);
-    this->seperator = seperator;
+    this->separator = separator;
 }
 
+/**
+ * @brief returns EOF status
+ * @return bool
+ * @retval 1 if EOF is reached otherwise 0
+ */
 bool CSVParser::eof()
 {
     return this->filestream.eof();
 }
 
-std::vector<std::string> CSVParser::getrow()
+/**
+ * @return string vector
+ */
+std::vector<std::string> CSVParser::getRow()
 {
     std::vector<std::string> values;
 
@@ -37,10 +61,10 @@ std::vector<std::string> CSVParser::getrow()
 
     size_t pos = 0;
 
-    while ((pos = row.find(this->seperator)) != std::string::npos)
+    while ((pos = row.find(this->separator)) != std::string::npos)
     {
         values.push_back(row.substr(0, pos));
-        row.erase(0, pos + this->seperator.length());
+        row.erase(0, pos + this->separator.length());
     }
     values.push_back(row);
     return values;

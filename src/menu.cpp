@@ -4,11 +4,29 @@
 #include <string>
 #include <vector>
 
-menuentry::menuentry(std::string title, std::vector<std::string> menutext, std::vector<func> menufunctions)
+/**
+ * @file menu.cpp
+ * @brief Source file for the Menuentry class
+ *
+ * Contains definitions for the Menuentry class
+ */
+
+/**
+ * @param title string
+ * @param menutext vector of strings
+ * @param menufunctions vector of void function pointers
+ *
+ * title is the header used for the menu
+ *
+ * menutext is uses for the title of menu entries
+ *
+ * menufunctions is used to contain the function pointers
+ */
+Menuentry::Menuentry(std::string title, std::vector<std::string> menutext, std::vector<func> menufunctions)
 {
     if (DEBUG) std::cout << "[DEBUG] MENUENTRY CONSTRUCTER" << std::endl;
 
-    if (menutext.size() != menufunctions.size()) throw std::invalid_argument("menuentry::menuentry vector size does not match");
+    if (menutext.size() != menufunctions.size()) throw std::invalid_argument("Menuentry::Menuentry vector size does not match");
 
     this->title = title;
     this->size = menutext.size();
@@ -16,7 +34,14 @@ menuentry::menuentry(std::string title, std::vector<std::string> menutext, std::
     this->menufunctions = menufunctions;
 }
 
-bool menuentry::runfunction(unsigned long entry)
+/**
+ * @param entry position of wanted entry as unsigned long
+ * @return bool
+ * @retval 1 if entry does not exist otherwise 0
+ *
+ * Calls the function behind the entry number
+ */
+bool Menuentry::runfunction(unsigned long entry)
 {
     if (DEBUG) std::cout << "[DEBUG] MENUENTRY RUNFUNCTION" << std::endl;
 
@@ -25,7 +50,14 @@ bool menuentry::runfunction(unsigned long entry)
     this->menufunctions[entry]();
     return 0;
 }
-bool menuentry::runinput()
+
+/**
+ * @return bool
+ * @retval 1 if input is -1 otherwise 0
+ *
+ * Reads from stdin and runs runfunction
+ */
+bool Menuentry::runinput()
 {
     if (DEBUG) std::cout << "[DEBUG] MENUENTRY RUNINPUT" << std::endl;
 
@@ -40,7 +72,20 @@ bool menuentry::runinput()
     return 0;
 }
 
-void menuentry::printtext(std::string exittext)
+/**
+ * Prints all menu entries and the default exit value "Zurück" defined in defines.h
+ */
+void Menuentry::printtext()
+{
+    this->printtext(DEFAULTEXITTEXT);
+}
+
+/**
+ * @param exittext string
+ *
+ * Prints all menu entries and a exit value
+ */
+void Menuentry::printtext(std::string exittext)
 {
     if (DEBUG) std::cout << "[DEBUG] MENUENTRY PRINTTEXT" << std::endl;
 
@@ -51,9 +96,4 @@ void menuentry::printtext(std::string exittext)
         std::cout << i + 1 << std::left << std::setw(2) << '.' << this->menutext[i] << std::endl;
     }
     std::cout << "0. " << exittext << std::endl;
-}
-
-void menuentry::printtext()
-{
-    this->printtext("Zurück");
 }

@@ -85,3 +85,7 @@ clean: rmdirectories
 
 loc:
 	-find . -name '*.cpp' -o -name '*.c' -o -name '*.h' -o -name '*.hpp'| xargs wc -l
+
+docs: Doxyfile
+	@-doxygen $<
+

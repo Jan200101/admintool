@@ -1,7 +1,13 @@
 #ifndef DEFINES_H
 #define DEFINES_H
 
-#define DEFAULTSEPERATOR ";"
+/**
+ * @file defines.h
+ * @brief header for defines for multiple sources
+ */
+
+#define DEFAULTSEPARATOR ";"
+#define DEFAULTEXITTEXT "Zurück"
 #define FILENAME "res/schuler.csv"
 
 #ifndef DEBUG
