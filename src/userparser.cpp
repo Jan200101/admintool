@@ -16,8 +16,19 @@
  */
 std::vector<User> readUser()
 {
+    return readUser(FILENAME);
+}
+
+/**
+ * @param filename string
+ * @return vector of the User class
+ *
+ * Returns a vector containing the User class initialized via the contents of a CSV read by CSVParser
+ */
+std::vector<User> readUser(std::string filename)
+{
     std::vector<User> userliste;
-    CSVParser csv(FILENAME);
+    CSVParser csv(filename);
     std::vector<std::string> row;
 
     for (unsigned short entry = 0; !csv.eof(); ++entry)
