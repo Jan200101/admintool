@@ -12,14 +12,10 @@
  */
 
 /**
- * @name userliste
  * @brief global vector of all user objects
  */
 std::vector<User> userliste = readUser();
 
-/**
- * @name main
- */
 int main(int argc, char* argv[])
 {
     if (argc > 1)
@@ -31,7 +27,6 @@ int main(int argc, char* argv[])
 }
 
 /**
- * @name menu
  * @brief main menu function
  */
 void menu()
@@ -59,7 +54,6 @@ void menu()
 }
 
 /**
- * @name userlisten
  * @brief first menu entry
  */
 void userlisten()
@@ -78,7 +72,6 @@ void userlisten()
 }
 
 /**
- * @name userneuladen
  * @brief second menu entry
  */
 void userneuladen()

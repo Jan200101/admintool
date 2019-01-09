@@ -15,7 +15,6 @@
  */
 
 /**
- * @name func
  * sets typedef for a void function pointer
  */
 typedef void (*func)();
