@@ -1,8 +1,9 @@
 from os import name, environ, access, pathsep, X_OK
 from os.path import isfile, join
+from multiprocessing import cpu_count as _cpu_count
 from subprocess import Popen, PIPE
+from shutil import rmtree
 from time import sleep
-
 
 def which(program) -> bool:
     for direc in environ["PATH"].split(pathsep):
@@ -17,56 +18,52 @@ FAILURE = "!!!FAILURE!!!\n"
 
 
 def main() -> None:
+    cpu_count = _cpu_count()
+
+    rmtree("obj", ignore_errors=True)
 
     if name != 'nt' and which("make"):
         print("================= RUNNING LINUX TESTS =================")
 
         print("[RELEASE]")
-        if test("Release"):
+        if test("Release", cpu_count):
             print(FAILURE)
-            exit(1)
-        print(SUCCESS)
+        else: print(SUCCESS)
 
         print("[DEBUG]")
-        if test("Debug"):
+        if test("Debug", cpu_count):
             print(FAILURE)
-            exit(1)
-        print(SUCCESS)
+        else: print(SUCCESS)
 
     if which("mingw32-make"):
-        print("================= RUNNING WINDOWS TESTS =================")
+        print("================ RUNNING WINDOWS TESTS ================")
 
         print("[RELEASE]")
-        if test("Release", True):
+        if test("Release", cpu_count, True):
             print(FAILURE)
-            exit(1)
-        print(SUCCESS)
+        else: print(SUCCESS)
 
         print("[DEBUG]")
-        if test("Debug", True):
+        if test("Debug", cpu_count, True):
             print(FAILURE)
-            exit(1)
-        print(SUCCESS)
+        else: print(SUCCESS)
 
 
-def test(type: str, windows: bool = False) -> bool:
+def test(type: str, cpu_count: int, windows: bool = False) -> bool:
 
     if not windows:
-        make = "make"
+        make = f"make -j{cpu_count}"
         args = ""
     else:
         make = "mingw32-make"
-        args = "WIN=1"
-
-    cleanup = Popen(f'{make} clean', shell=True, stdout=PIPE, stderr=PIPE)
-    while cleanup.poll() is None:
-        sleep(0.5)
-    del cleanup
+        args = f"WIN=1 -j{cpu_count}"
 
     proc = Popen(f"{make} TARGET={type} {args}", shell=True, stdout=PIPE, stderr=PIPE)
 
     while proc.poll() is None:
-        sleep(0.5)
+        sleep(1)
+
+    rmtree("obj", ignore_errors=True)
 
     if proc.returncode != 0:
         print(proc.returncode)
