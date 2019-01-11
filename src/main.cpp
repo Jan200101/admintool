@@ -26,7 +26,7 @@ int main(int argc, char* argv[])
         try
         {
             userliste = readUser(argv[1]);
-            std::cout << "Converted file" << std::endl
+            std::cout << "Converted file" << std::endl;
         }
         catch (...)
         {
