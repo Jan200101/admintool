@@ -44,12 +44,12 @@ void menu()
     std::vector<void (*)()> func = {(&userlisten),
                                     (&userneuladen)};
 
-    Menuentry menu(title, text, func);
+    Menuentry menustructure(title, text, func);
 
     while (running)
     {
-        menu.printtext(exittext);
-        if (menu.runinput()) running = false;
+        menustructure.printtext(exittext);
+        if (menustructure.runinput()) running = false;
     }
 }
 
