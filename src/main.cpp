@@ -16,6 +16,9 @@
  */
 std::vector<User> userliste = readUser();
 
+/**
+ * @brief main function
+ */
 int main(int argc, char* argv[])
 {
     if (argc > 1)
