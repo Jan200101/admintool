@@ -16,6 +16,9 @@
  */
 std::vector<User> userliste;
 
+/**
+ * @brief main function
+ */
 int main(int argc, char* argv[])
 {
     if (argc > 1 && fexists(argv[1]))
@@ -23,6 +26,7 @@ int main(int argc, char* argv[])
         try
         {
             userliste = readUser(argv[1]);
+            std::cout << "Converted file" << std::endl
         }
         catch (...)
         {
