@@ -3,6 +3,7 @@
 
 #include <string>
 #include <vector>
+#include "defines.h"
 #include "user.hpp"
 
 /**
@@ -12,10 +13,8 @@
  * Contains definitions for user parsing functions
  */
 
-std::vector<User> readUser();
-std::vector<User> readUser(std::string filename);
+std::vector<User> readUser(std::string filename = FILENAME);
 
-void writeUser(std::vector<User>& userliste);
-void writeUser(std::vector<User>& userliste, std::string filename);
+void writeUser(std::vector<User>& userliste, std::string filename = FILENAME);
 
 #endif

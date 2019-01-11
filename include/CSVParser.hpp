@@ -28,8 +28,7 @@ class CSVParser
    public:
     CSVParser();
     ~CSVParser();
-    CSVParser(std::string filename);
-    CSVParser(std::string filename, std::string seperator);
+    CSVParser(std::string filename, std::string seperator = DEFAULTSEPARATOR);
 
     bool eof();
 

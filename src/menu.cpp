@@ -73,17 +73,10 @@ bool Menuentry::runinput()
 }
 
 /**
- * Prints all menu entries and the default exit value "Zurück" defined in defines.h
- */
-void Menuentry::printtext()
-{
-    this->printtext(DEFAULTEXITTEXT);
-}
-
-/**
  * @param exittext string
  *
  * Prints all menu entries and a exit value
+ * Default exittext is "Zurück" and defined in defines.h
  */
 void Menuentry::printtext(std::string exittext)
 {
