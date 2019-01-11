@@ -15,18 +15,8 @@ CSVParser::~CSVParser()
 
 /**
  * @param filename set what file to use
- *
- * Separator defaults to ";" defined in defines.h
- */
-CSVParser::CSVParser(std::string filename)
-{
-    this->filestream.open(filename);
-    this->separator = DEFAULTSEPARATOR;
-}
-
-/**
- * @param filename set what file to use
  * @param separator set what separator to use.
+ * Default seperator ";" is defined in defines.h
  */
 CSVParser::CSVParser(std::string filename, std::string separator)
 {

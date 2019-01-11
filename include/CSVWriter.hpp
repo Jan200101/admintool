@@ -28,8 +28,7 @@ class CSVWriter
     std::stringstream stream;
 
    public:
-    CSVWriter();
-    CSVWriter(std::string separator);
+    CSVWriter(std::string separator = DEFAULTSEPARATOR);
 
     CSVWriter& add(char* str);
     CSVWriter& add(const char* str);

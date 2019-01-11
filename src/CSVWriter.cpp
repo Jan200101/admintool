@@ -7,20 +7,10 @@
  * Contains definitions for the CSVWriter class
  */
 
-/** 
- * Default Constructor
- *
- * Separator defaults to ";" defined in defines.h
- */
-CSVWriter::CSVWriter()
-{
-    this->firstRow = true;
-    this->separator = DEFAULTSEPARATOR;
-    this->amount = 0;
-}
-
 /**
  * @param separator set what separator to use.
+ *
+ * Default seperator ";" defined in defines.h
  */
 CSVWriter::CSVWriter(std::string separator)
 {

@@ -11,16 +11,6 @@
  */
 
 /**
- * @return vector of the User class
- *
- * Returns a vector containing the User class initialized via the contents of a CSV read by CSVParser
- */
-std::vector<User> readUser()
-{
-    return readUser(FILENAME);
-}
-
-/**
  * @param filename string
  * @return vector of the User class
  *
@@ -52,19 +42,10 @@ std::vector<User> readUser(std::string filename)
 
 /**
  * @param userliste vector pointer containing the User class
- *
- * writes the contents contents of userliste to a CSV file. The default path "res/schuler.csv" is defined in defines.h
- */
-void writeUser(std::vector<User>& userliste)
-{
-    writeUser(userliste, FILENAME);
-}
-
-/**
- * @param userliste vector pointer containing the User class
  * @param filename string
  *
  * writes the contents contents of userliste to a CSV file.
+ * the default value for filename is "res/schuler.csv' and is defined in defines.h
  */
 void writeUser(std::vector<User>& userliste, std::string filename)
 {
