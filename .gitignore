@@ -1,5 +1,4 @@
-bin
-obj
+build
 *.o
 admintool.depend
 admintool.layout

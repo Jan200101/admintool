@@ -7,8 +7,7 @@
  */
 
 #define DEFAULTSEPARATOR ";"
-#define DEFAULTEXITTEXT "Zurück"
-#define FILENAME "res/schuler.csv"
+#define FILENAME "../res/schuler.csv" // updated path for the build directory
 
 #ifndef DEBUG
 #define DEBUG 0
