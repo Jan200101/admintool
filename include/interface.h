@@ -3,7 +3,12 @@
 
 #include <QMainWindow>
 #include <QTableWidget>
-#include <QTranslator>
+//#include <QTranslator> // TODO add translations
+
+/**
+ * @file interface.cpp
+ * @brief Header file for the QT UI
+ */
 
 namespace Ui
 {
@@ -19,6 +24,7 @@ class MainWindow : public QMainWindow
     ~MainWindow();
 
     void addRow(const char* forename, const char* surname, const char* nickname);
+    void addRow(std::string forename, std::string surname, std::string nickname);
     void setItem(unsigned short count, unsigned short column, const char* text);
 
    private:

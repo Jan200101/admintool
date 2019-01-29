@@ -1,6 +1,4 @@
 build
-*.o
-admintool.depend
-admintool.layout
-.directory
 docs
+*.o
+*.qm
