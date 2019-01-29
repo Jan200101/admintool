@@ -14,13 +14,15 @@
    <string>Admintool</string>
   </property>
   <property name="styleSheet">
-   <string notr="true">QFrame {
-  background-color: #232629;
+   <string notr="true">* {
+  color: rgb(255, 255, 255);
+  background-color: #30353a;
 }
 
-QMainWindow{
-  background-color: #30353a;
-}</string>
+QTableView {
+  background-color: #232629;
+}
+</string>
   </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QVBoxLayout" name="verticalLayout_2">
@@ -28,6 +30,9 @@ QMainWindow{
      <layout class="QVBoxLayout" name="verticalLayout">
       <item>
        <widget class="QTableWidget" name="tableWidget">
+        <property name="styleSheet">
+         <string notr="true"/>
+        </property>
         <property name="locale">
          <locale language="German" country="Germany"/>
         </property>
@@ -49,17 +54,11 @@ QMainWindow{
         <property name="showDropIndicator" stdset="0">
          <bool>false</bool>
         </property>
-        <property name="alternatingRowColors">
-         <bool>true</bool>
-        </property>
         <property name="verticalScrollMode">
          <enum>QAbstractItemView::ScrollPerPixel</enum>
         </property>
         <property name="horizontalScrollMode">
          <enum>QAbstractItemView::ScrollPerPixel</enum>
-        </property>
-        <property name="gridStyle">
-         <enum>Qt::NoPen</enum>
         </property>
         <property name="sortingEnabled">
          <bool>true</bool>
