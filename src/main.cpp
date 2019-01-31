@@ -13,7 +13,7 @@
  */
 int main(int argc, char* argv[])
 {
-    QApplication a(argc, argv); //setup QApplication before calling QMainWindow class
+    QApplication a(argc, argv); // setup QApplication before calling QMainWindow class
     MainWindow w;               // class that inherits from QMainWindow
     w.show();
 
