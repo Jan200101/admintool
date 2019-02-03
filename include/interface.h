@@ -29,7 +29,7 @@ class MainWindow : public QMainWindow
 
    private:
     Ui::MainWindow* ui;
-    QTableWidget* tableWidget;
+    //QTableWidget* tableWidget;
     //QTranslator m_translator;
 };
 
